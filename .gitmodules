@@ -1,0 +1,12 @@
+[submodule "Suckless/dmenu"]
+	path = Suckless/dmenu
+	url = ../Suckless/dmenu
+	branch = my_dmenu
+[submodule "Suckless/dwm"]
+	path = Suckless/dwm
+	url = ../Suckless/dwm
+	branch = my_dwm
+[submodule "Suckless/st"]
+	path = Suckless/st
+	url = ../Suckless/st
+	branch = my_st
