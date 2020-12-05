@@ -103,7 +103,7 @@ source $ZSH/oh-my-zsh.sh
 alias cl="clear"
 alias yayupdate="sudo pacman -Sy && sudo powerpill -Su && yay -Su"
 alias pacupdate="sudo pacman -Sy && sudo powerpill -Su && pacaur -Su"
-alias mongod-auth="mongod --auth"
+alias mongod-auth="sudo mongod --auth"
 alias mongo-connect="mongo --authenticationDatabase 'admin' -u 'tiagofer' -p"
 
 # Environment Variables
