@@ -97,7 +97,15 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Aliases
+
 alias cl="clear"
 alias yayupdate="sudo pacman -Sy && sudo powerpill -Su && yay -Su"
 alias pacupdate="sudo pacman -Sy && sudo powerpill -Su && pacaur -Su"
+alias mongod-auth="mongod --auth"
+alias mongo-connect="mongo --authenticationDatabase 'admin' -u 'tiagofer' -p"
 
+# Environment Variables
+
+export PATH=$PATH:/home/tiagofer/.local/bin/
