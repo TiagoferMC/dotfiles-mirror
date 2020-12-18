@@ -103,6 +103,7 @@ source $ZSH/oh-my-zsh.sh
 alias cl="clear"
 alias yayupdate="sudo pacman -Sy && sudo powerpill -Su && yay -Su"
 alias pacupdate="sudo pacman -Sy && sudo powerpill -Su && pacaur -Su"
+alias wifi=". /home/tiagofer/Scripts/WiFi/wifi.sh"
 alias mongod-auth="sudo mongod --auth"
 alias mongo-connect="mongo --authenticationDatabase 'admin' -u 'tiagofer' -p"
 
