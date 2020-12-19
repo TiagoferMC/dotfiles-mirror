@@ -22,9 +22,9 @@ do
     if [[ "$mute" == "yes"   ]]; then
         vol_string="M"
     elif [[ "$vol_left" == "$vol_right"  ]]; then
-        vol_string="$vol_left"
+        vol_string="$vol_left%"
     else
-        vol_string="$vol_left | $vol_right"
+        vol_string="$vol_left% | $vol_right%"
     fi
 
     # Set Bar
