@@ -31,3 +31,4 @@ do
     xsetroot -name " [$vol_string] $(date +%a\ %F\ %T) ";
 done &
 
+export GPG_TTY=$(tty)
