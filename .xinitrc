@@ -4,7 +4,7 @@
 picom -b
 
 # Keybindings
-xbindkeys
+sxhkd &
 
 # Other Things
 . ./.profile
