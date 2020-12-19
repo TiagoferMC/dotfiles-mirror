@@ -24,7 +24,7 @@ mod1 + shift + m
 mod1 + shift + p; {b, t, v, d, s, f}
     {firefox, \ 
      st -e htop, \
-     st -e nvimi, \
+     st -e nvim, \
      discord,  \
      steam, \
      st -e vifm}
