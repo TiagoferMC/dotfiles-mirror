@@ -5,15 +5,15 @@ mod1 + w
 
 XF86AudioRaiseVolume
     pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +2% ; \
-    pactl set-sink-mute 1 false ; pactl set-sink-volume 1 +2%
+    pactl set-sink-mute 4 false ; pactl set-sink-volume 4 +2%
 
 XF86AudioLowerVolume
     pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -2% ; \
-    pactl set-sink-mute 1 false ; pactl set-sink-volume 1 -2%
+    pactl set-sink-mute 4 false ; pactl set-sink-volume 4 -2%
 
 XF86AudioMute
     pactl set-sink-mute 0 toggle ; \
-    pactl set-sink-mute 1 toggle
+    pactl set-sink-mute 4 toggle
 
 mod1 + shift + r
     killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
@@ -24,12 +24,15 @@ Sys_Req
 mod1 + shift + m
     st -e sh -c 'neofetch ; $SHELL'
 
-mod1 + shift + p; {b, l, t, v, f, d, s}
-    {firefox, \
-     st -e links ddg.gg, \
-     st -e htop, \
+mod1 + shift + p; {t, v, f, l, m, d, s}
+    {st -e htop, \
      st -e nvim, \
      st -e vifm, \
+     st -e links ddg.gg, \
+     mullvad-vpn, \
      discord,  \
      steam}
 
+mod1 + shift + p; b; {b, v}
+    {firefox, \
+     qutebrowser}
