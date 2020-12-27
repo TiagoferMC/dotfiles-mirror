@@ -15,6 +15,13 @@ XF86AudioMute
     pactl set-sink-mute 0 toggle ; \
     pactl set-sink-mute 4 toggle
 
+XF86MonBrightnessDown
+    xbacklight -dec 20
+
+XF86MonBrightnessUp
+    xbacklight -inc 20
+
+
 mod1 + shift + r
     killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
 
