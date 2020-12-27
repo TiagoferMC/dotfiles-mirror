@@ -101,12 +101,14 @@ source $ZSH/oh-my-zsh.sh
 # Aliases
 
 alias cl="clear"
+alias v="nvim"
 alias yayupdate="sudo pacman -Sy && sudo powerpill -Su && yay -Su"
 alias pacupdate="sudo pacman -Sy && sudo powerpill -Su && pacaur -Su"
 alias wifi=". /home/tiagofer/Scripts/WiFi/wifi.sh"
+alias mullvpn=". /home/tiagofer/Scripts/VPN/mullvad.sh"
 alias mongod-auth="sudo mongod --auth"
 alias mongo-connect="mongo --authenticationDatabase 'admin' -u 'tiagofer' -p"
 
 # Environment Variables
 
-export PATH=$PATH:/home/tiagofer/.local/bin/
+export PATH=$PATH:/home/tiagofer/.local/bin/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin
