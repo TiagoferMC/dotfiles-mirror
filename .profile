@@ -13,22 +13,6 @@ export LC_ALL="en_US.UTF-8"
 LC_CTYPE="C"
 export LC_CTYPE="C"
 
-
-xport LANG="en_US.UTF-8"
-export LANGUAGE="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="C"
-
-xport LANG="en_US.UTF-8"
-export LANGUAGE="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="C"
-
-xport LANG="en_US.UTF-8"
-export LANGUAGE="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
-export LC_CTYPE="C"
-
 # Intervals
 sleep_interval=0.1
 
