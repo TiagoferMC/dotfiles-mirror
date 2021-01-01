@@ -1,10 +1,34 @@
 #!/bin/sh
 
 # Locales
+LANG="en_US.UTF-8"
 export LANG="en_US.UTF-8"
+
+LANGUAGE="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+
+LC_ALL="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+LC_CTYPE="C"
+export LC_CTYPE="C"
+
+
+xport LANG="en_US.UTF-8"
 export LANGUAGE="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="C"
+
+xport LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="C"
+
+xport LANG="en_US.UTF-8"
+export LANGUAGE="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+export LC_CTYPE="C"
+
 # Intervals
 sleep_interval=0.1
 
@@ -27,8 +51,14 @@ do
         vol_string="$vol_left% | $vol_right%"
     fi
 
+    # Brightness
+    brightness=$(xbacklight | cut -f1 -d.)
+
+    # VPN
+    vpn=0
+
     # Set Bar
-    xsetroot -name " [$vol_string] $(date +%a\ %F\ %T) ";
+    xsetroot -name " V: $vol_string | B: $brightness% | VPN: $vpn | $(date +%a\ %F\ %T) ";
 done &
 
 export GPG_TTY=$(tty)
