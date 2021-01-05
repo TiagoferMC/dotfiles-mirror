@@ -31,16 +31,21 @@ Sys_Req
 mod1 + shift + m
     st -e sh -c 'neofetch ; $SHELL'
 
-mod1 + shift + p; {t, v, f, l, m, d, e, s}
+mod1 + shift + p; {t, v, l, m, d, e, s}
     {st -e htop, \
      st -e nvim, \
-     st -e vifm, \
      st -e links ddg.gg, \
      mullvad-vpn, \
      discord,  \
      element-desktop \
      steam}
 
-mod1 + shift + p; b; {b, v}
+mod1 + shift + p; b; {b, c, v}
     {firefox, \
+     chromium, \
      qutebrowser}
+
+mod1 + shift + p; f; {f, v, d}
+    {dmenufm, \
+     st -e vifm, \
+     dolphin}
