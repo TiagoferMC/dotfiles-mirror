@@ -29,7 +29,7 @@ Sys_Req
     spectacle
 
 mod1 + shift + m
-    st -e sh -c 'neofetch ; $SHELL'
+    st -e sh -c 'cd ~ ; neofetch ; $SHELL'
 
 mod1 + shift + p; {t, v, l, m, d, e, s}
     {st -e htop, \
