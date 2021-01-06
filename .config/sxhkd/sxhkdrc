@@ -37,7 +37,7 @@ mod1 + shift + p; {t, v, l, m, d, e, s}
      st -e links ddg.gg, \
      mullvad-vpn, \
      discord,  \
-     element-desktop \
+     element-desktop, \
      steam}
 
 mod1 + shift + p; b; {b, c, v}
