@@ -14,4 +14,4 @@ sxhkd &
 
 # Window Manager
 exec dwm
-
+exec dwmblocks
