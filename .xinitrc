@@ -6,12 +6,13 @@ picom -b
 # Keybindings
 sxhkd &
 
-# Other Things
-. ./.profile
-
 # Wallpaper
 /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
 
+# Other Things
+. ./.profile
+
 # Window Manager
 exec dwm
-exec dwmblocks
+
+

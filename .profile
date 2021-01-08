@@ -13,41 +13,7 @@ export LC_ALL="en_US.UTF-8"
 LC_CTYPE="C"
 export LC_CTYPE="C"
 
-# Intervals
-sleep_interval=0.1
-
-# Topbar
-while sleep $sleep_interval 
-do
-
-    # Volume
-    vol_left=$(pactl list sinks | grep "Volume" | head -n 1 | awk '{ print $5  }' | cut -f1 -d%)
-    vol_right=$(pactl list sinks | grep "Volume" | awk '{ print $12 }' | cut -f1 -d%)
-    mute=$(pactl list sinks | grep "Mute" | awk '{ print $2 }' | cut -f1 -d%)
-
-    vol_string=""
-
-    if [[ "$mute" == "yes"   ]]; then
-        vol_string="M"
-    elif [[ "$vol_left" == "$vol_right"  ]]; then
-        vol_string="$vol_left%"
-    else
-        vol_string="$vol_left% | $vol_right%"
-    fi
-
-    # Brightness
-    brightness=$(xbacklight | cut -f1 -d.)
-
-    # VPN
-    connection_status=cat /var/log/mullvad-vpn/daemon.log | tail -n 3 | grep "New tunnel state" | awk {'print $6'}
-    country=cat /var/log/mullvad-vpn/daemon.log | tail -n 3 | grep "New tunnel state" | awk -F \, {'print $7'} | awk -F \" {'print $2'}
-    city=cat /var/log/mullvad-vpn/daemon.log | tail -n 3 | grep "New tunnel state" | awk -F \, {'print $9'} | awk -F \" {'print $1'} | cut -d \  -f 2
-
-    vpn="$connection_status $country ($city)"
-
-    # Set Bar
-    xsetroot -name " V: $vol_string | B: $brightness% | VPN: $vpn | $(date +%a\ %F\ %T) ";
-done &
+# dwmblocks &
 
 # Other program settings:
 export DICS="/usr/share/stardict/dic/"
@@ -66,6 +32,8 @@ export QT_QPA_PLATFORMTHEME="gtk2"	# Have QT use gtk2 theme.
 export MOZ_USE_XINPUT2="1"		# Mozilla smooth scrolling/touchpads.
 export AWT_TOOLKIT="MToolkit wmname LG3D"	#May have to install wmname
 export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
+
+export TERMINAL=st
 
 # This is the list for lf icons:
 export LF_ICONS="di=📁:\

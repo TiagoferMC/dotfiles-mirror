@@ -178,7 +178,7 @@ void statusloop()
 	{
 		getcmds(i);
 		writestatus();
-		sleep(1.0);
+		sleep(0.2);
 		i++;
 	}
 }
