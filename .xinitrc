@@ -13,6 +13,6 @@ sxhkd &
 . ./.profile
 
 # Window Manager
+setsid -f dunst
 setsid -f dwmblocks
 exec dwm
-dunst &
