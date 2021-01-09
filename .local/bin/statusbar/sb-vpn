@@ -55,7 +55,7 @@ case $BLOCK_BUTTON in
          vpn="🔒"
      fi
  else
-     vpn=""
+     vpn="🔓"
  fi
 
  printf "$vpn"
