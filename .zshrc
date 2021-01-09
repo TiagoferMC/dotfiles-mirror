@@ -108,8 +108,7 @@ alias wifi=". /home/tiagofer/Scripts/WiFi/wifi.sh"
 alias mullvpn=". /home/tiagofer/Scripts/VPN/mullvad.sh"
 alias mongod-auth="sudo mongod --auth"
 alias mongo-connect="mongo --authenticationDatabase 'admin' -u 'tiagofer' -p"
-
-#!/bin/sh
+alias zeronetconfig="sudo -u zeronet python /opt/zeronet/zeronet.py --config_file /etc/zeronet.conf"
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
