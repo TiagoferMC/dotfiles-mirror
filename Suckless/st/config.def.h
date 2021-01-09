@@ -10,7 +10,7 @@ static char *fonts[] = {
   "Hack:pixelsize=12:antialias=true:autohint=true",
   "Joypixels:pixelsize=12:antialias=true:autohint=true",
   "Liberation Mono:pixelsize=12:antialias=true:autohint=true",
-  "tewi:pixelsize=12:antialias=true:autohint=true"
+  "tewi:pixelsize=12:antialias=true:autohint=true",
   "monospace:pixelsize=12:antialias=true:autohint=true"
 };
 static int fonts_current = 0;

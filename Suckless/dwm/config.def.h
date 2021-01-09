@@ -9,7 +9,7 @@ static const char *fonts[]          = {
     "Hack:size=10",
     "Joypixels:size=10",
     "Liberation Mono:size=10",
-    "tewi:size=10"
+    "tewi:size=10",
     "monospace:size=10"
 };
 static const char dmenufont[]       = "Hack:size=10";
