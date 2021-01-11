@@ -28,6 +28,9 @@ Sys_Req
 mod1 + shift + m
     st -e sh -c 'cd ~ ; neofetch ; $SHELL'
 
+mod1 + p
+    dmenu_run
+
 mod1 + shift + p; {t, v, l, m, d, e, s}
     {st -e htop, \
      st -e nvim, \
