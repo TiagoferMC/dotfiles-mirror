@@ -61,6 +61,7 @@ static void zoom(const Arg *);
 static void zoomabs(const Arg *);
 static void zoomreset(const Arg *);
 static void ttysend(const Arg *);
+static void cyclefonts(const Arg *);
 
 /* config.h for applying patches and the configuration. */
 #include "config.h"
@@ -970,6 +971,18 @@ xloadfont(Font *f, FcPattern *pattern)
 }
 
 void
+cyclefonts(const Arg *dummy)
+{
+	fonts_current++;
+	if (fonts_current > (sizeof fonts / sizeof fonts[0]) - 1) {
+		fonts_current = 0;
+	}
+	usedfont = fonts[fonts_current];
+	xloadfonts(fonts[fonts_current], 0);
+	redraw();
+}
+
+void
 xloadfonts(char *fontstr, double fontsize)
 {
 	FcPattern *pattern;
@@ -1148,8 +1161,8 @@ xinit(int cols, int rows)
 	if (!FcInit())
 		die("could not init fontconfig.\n");
 
-	usedfont = (opt_font == NULL)? font : opt_font;
-	xloadfonts(usedfont, 0);
+	usedfont = fonts[fonts_current];
+	xloadfonts(fonts[fonts_current], 0);
 
 	/* colors */
 	xw.cmap = XCreateColormap(xw.dpy, parent, xw.vis, None);
@@ -1936,6 +1949,81 @@ run(void)
 
 	/* Waiting for window mapping */
 	do {
+	ttyfd = ttynew(opt_line, shell, opt_io, opt_cmd);
+	cresize(w, h);
+
+	for (timeout = -1, drawing = 0, lastblink = (struct timespec){0};;) {
+		FD_ZERO(&rfd);
+		FD_SET(ttyfd, &rfd);
+		FD_SET(xfd, &rfd);
+
+		if (XPending(xw.dpy))
+			timeout = 0;  /* existing events might not set xfd */
+
+		seltv.tv_sec = timeout / 1E3;
+		seltv.tv_nsec = 1E6 * (timeout - 1E3 * seltv.tv_sec);
+		tv = timeout >= 0 ? &seltv : NULL;
+
+		if (pselect(MAX(xfd, ttyfd)+1, &rfd, NULL, NULL, tv, NULL) < 0) {
+			if (errno == EINTR)
+				continue;
+			die("select failed: %s\n", strerror(errno));
+		}
+		clock_gettime(CLOCK_MONOTONIC, &now);
+
+		if (FD_ISSET(ttyfd, &rfd))
+			ttyread();
+
+		xev = 0;
+		while (XPending(xw.dpy)) {
+			xev = 1;
+			XNextEvent(xw.dpy, &ev);
+			if (XFilterEvent(&ev, None))
+				continue;
+			if (handler[ev.type])
+				(handler[ev.type])(&ev);
+		}
+
+		/*
+		 * To reduce flicker and tearing, when new content or event
+		 * triggers drawing, we first wait a bit to ensure we got
+		 * everything, and if nothing new arrives - we draw.
+		 * We start with trying to wait minlatency ms. If more content
+		 * arrives sooner, we retry with shorter and shorter preiods,
+		 * and eventually draw even without idle after maxlatency ms.
+		 * Typically this results in low latency while interacting,
+		 * maximum latency intervals during `cat huge.txt`, and perfect
+		 * sync with periodic updates from animations/key-repeats/etc.
+		 */
+		if (FD_ISSET(ttyfd, &rfd) || xev) {
+			if (!drawing) {
+				trigger = now;
+				drawing = 1;
+			}
+			timeout = (maxlatency - TIMEDIFF(now, trigger)) \
+			          / maxlatency * minlatency;
+			if (timeout > 0)
+				continue;  /* we have time, try to find idle */
+		}
+
+		/* idle detected or maxlatency exhausted -> draw */
+		timeout = -1;
+		if (blinktimeout && tattrset(ATTR_BLINK)) {
+			timeout = blinktimeout - TIMEDIFF(now, lastblink);
+			if (timeout <= 0) {
+				if (-timeout > blinktimeout) /* start visible */
+					win.mode |= MODE_BLINK;
+				win.mode ^= MODE_BLINK;
+				tsetdirtattr(ATTR_BLINK);
+				lastblink = now;
+				timeout = blinktimeout;
+			}
+		}
+
+		draw();
+		XFlush(xw.dpy);
+		drawing = 0;
+	}
 		XNextEvent(xw.dpy, &ev);
 		/*
 		 * This XFilterEvent call is required because of XOpenIM. It

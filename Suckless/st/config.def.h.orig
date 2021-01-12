@@ -7,8 +7,11 @@
  */
 static char *fonts[] = {
   "Fira Code:pixelsize=12:antialias=true:autohint=true",
+  "Hack:pixelsize=12:antialias=true:autohint=true",
+  "Joypixels:pixelsize=12:antialias=true:autohint=true",
   "Liberation Mono:pixelsize=12:antialias=true:autohint=true",
-  "tewi:pixelsize=12:antialias=true:autohint=true"
+  "tewi:pixelsize=12:antialias=true:autohint=true",
+  "monospace:pixelsize=12:antialias=true:autohint=true"
 };
 static int fonts_current = 0;
 
@@ -218,6 +221,7 @@ static Shortcut shortcuts[] = {
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
 	{ TERMMOD,              XK_S,           cyclefonts,     {}        },
+	{ TERMMOD,              XK_Return,      newterm,        {.i =  0} },
 };
 
 /*
