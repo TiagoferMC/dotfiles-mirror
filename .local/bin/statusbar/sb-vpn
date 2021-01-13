@@ -9,7 +9,7 @@ case $BLOCK_BUTTON in
      6) "$TERMINAL" -e "$EDITOR" "$0" ;;
  esac
 
- if [ "$(cat /sys/class/net/tun*/operstate 2>/dev/null)" ]; then
+ if [ "$(cat /sys/class/net/tun*/operstate 2>/dev/null)" ] || [ "$(ls /sys/class/net/wg-mullvad/ 2>/dev/null)" ]; then
     if [ "$(tail -n 5 /var/log/mullvad-vpn/daemon.log | grep 'New tunnel state' | awk \{'print $6'\})" = 'Connected' ]; then
         country=$(tail -n 5 /var/log/mullvad-vpn/daemon.log | grep "New tunnel state" | awk -F \, \{'print $7'\} | awk -F \" \{'print $2'\})
         # city=$(tail -n 5 /var/log/mullvad-vpn/daemon.log | grep "New tunnel state" | awk -F \, \{'print $9'\} | awk -F \" \{'print $1'\} | cut -d \  -f 2)
