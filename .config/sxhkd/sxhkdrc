@@ -25,6 +25,9 @@ mod1 + shift + r
 Sys_Req
     spectacle
 
+ctrl + mod1 + shift + Sys_Req 
+    st -e /home/tiagofer/Projects/turtleScreencap/turtleWatch.sh
+
 mod1 + shift + m
     st -e sh -c 'cd ~ ; neofetch ; $SHELL'
 
