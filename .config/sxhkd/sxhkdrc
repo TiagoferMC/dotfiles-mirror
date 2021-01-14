@@ -25,7 +25,7 @@ mod1 + shift + r
 Sys_Req
     spectacle
 
-ctrl + mod1 + shift + Sys_Req 
+mod1 + shift + Sys_Req; t 
     st -e /home/tiagofer/Projects/turtleScreencap/turtleWatch.sh
 
 mod1 + shift + m
