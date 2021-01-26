@@ -22,8 +22,17 @@ XF86MonBrightnessUp
 mod1 + shift + r
     killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
 
-Sys_Req
-    spectacle
+Print
+    maim | xclip -sel clip -t image/png && notify-send Screenshot 'Screenshot Copied to Clipboard'
+
+mod1 + Print
+    LIBGL_ALWAYS_SOFTWARE=1 maim -s | xclip -sel clip -t image/png && notify-send Screenshot 'Screenshot Copied to Clipboard'
+
+shift + Print
+    maim ~/Pictures/$(date +%FZ%T).png && notify-send Screenshot 'Screenshot Saved'
+
+mod1 + shift + Print
+    LIBGL_ALWAYS_SOFTWARE=1 maim -s ~/Pictures/$(date +%FZ%T).png && notify-send Screenshot 'Screenshot Saved'
 
 mod1 + shift + Sys_Req; t 
     st -e /home/tiagofer/Projects/turtleScreencap/turtleWatch.sh

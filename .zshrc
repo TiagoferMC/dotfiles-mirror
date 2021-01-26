@@ -102,8 +102,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias cl="clear"
 alias v="nvim"
-alias yayupdate="sudo pacman -Sy && sudo powerpill -Su && yay -Su"
-alias pacupdate="sudo pacman -Sy && sudo powerpill -Su && pacaur -Su"
 alias wifi=". /home/tiagofer/Scripts/WiFi/wifi.sh"
 alias mullvpn=". /home/tiagofer/Scripts/VPN/mullvad.sh"
 alias mongod-auth="sudo mongod --auth"
