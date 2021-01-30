@@ -14,21 +14,24 @@ if dein#load_state('/home/tiagofer/.vim/bundles')
     " Add or remove your plugins here like this:
     call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/neosnippet-snippets')
-    call dein#add('joshdick/onedark.vim')
 
     if !has('nvim')
         call dein#add('roxma/nvim-yarp')
         call dein#add('roxma/vim-hug-neovim-rpc')
     endif
 
-  call dein#end()
-  call dein#save_state()
+    call dein#add('sonph/onehalf', {'rtp': 'vim'})
+
+    call dein#end()
+    call dein#save_state()
 endif
 
 filetype plugin indent on
-syntax enable
+filetype indent on
 
-syntax enable Color Scheme
+syntax enable
+"syntax enable Color Scheme
+syntax on
 
 if dein#check_install()
     call dein#install()
@@ -41,40 +44,38 @@ if (empty($TMUX))
     if (has("termguicolors"))
         set termguicolors
     endif
+    if(exists('+termguicolors'))
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[38;2;%lu;%lu;%lum"
+        set termguicolors
+    endif
 endif
 
-colorscheme onedark
+colorscheme onehalfdark
 
 set tabstop=4
 set softtabstop=4
 set expandtab
 
+set t_Co=256
 set number
 set showcmd
 set cursorline
 
-filetype indent on
-
 set wildmenu
-
 set lazyredraw
-
 set showmatch
 
 set incsearch
 set hlsearch
-
 nnoremap <leader><space> :nohlsearch<CR>
 
 set foldenable
-
 set foldlevelstart=10
-
 nnoremap <space> za
-
 set foldmethod=indent
 
 nnoremap j gj
 nnoremap k gk
 
-
+"let g:airline_theme='onehalfdark'
