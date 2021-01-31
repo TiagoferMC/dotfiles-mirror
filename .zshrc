@@ -146,7 +146,7 @@ alias \
 	xi="sudo xbps-install" \
 	xr="sudo xbps-remove -R" \
 	xq="xbps-query" \
-	z="zathura"
+	za="zathura"
 
 alias \
 	magit="nvim -c MagitOnly" \
