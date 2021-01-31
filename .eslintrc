@@ -1,11 +1,10 @@
 {
-  "extends": [
-    "prettier",
-  ],
+  "extends": ["plugin:prettier/recommended"],
+  "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error",
-  },
-  "plugins": [
-    "prettier"
-  ]
+    "tabWidth": 4,
+    "singleQuote": true,
+    "prefer-arrow-callback": "off"
+  }
 }
