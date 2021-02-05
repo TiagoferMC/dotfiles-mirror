@@ -157,3 +157,7 @@ alias \
 # Environment Variables
 
 export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.local/bin/statusbar/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin
+
+# Git Stuff (Used Here Especially Because Remote SSH)
+export GPG_TTY=$(tty)
+
