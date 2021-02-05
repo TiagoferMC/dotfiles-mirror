@@ -4,13 +4,13 @@ if &compatible
 endif
 
 " Dein
-set runtimepath+=/home/tiagofer/.vim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('/home/tiagofer/.vim/bundles')
-    call dein#begin('/home/tiagofer/.vim/bundles')
+if dein#load_state('~/.vim/bundles')
+    call dein#begin('~/.vim/bundles')
 
     " Let dein manage dein
-    call dein#add('/home/tiagofer/.vim/bundles/repos/github.com/Shougo/dein.vim')
+    call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
     call dein#add('Shougo/deoplete.nvim')
 
     " Add or remove your plugins here like this:
@@ -73,8 +73,8 @@ if dein#load_state('/home/tiagofer/.vim/bundles')
     call dein#add('maxbrunsfeld/vim-yankstack')
     call dein#add('amix/vim-zenroom2')
     call dein#add('mattn/emmet-vim')
-    
-   
+ 
+
     call dein#end()
     call dein#save_state()
 endif
