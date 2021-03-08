@@ -4,18 +4,21 @@ if &compatible
 endif
 
 " Dein
-set runtimepath+=~/.vim/bundles/repos/github.com/Shougo/dein.vim
+set runtimepath+=/home/tiagofer/.vim/bundles/repos/github.com/Shougo/dein.vim
 
-if dein#load_state('~/.vim/bundles')
-    call dein#begin('~/.vim/bundles')
+if dein#load_state('/home/tiagofer/.vim/bundles')
+    call dein#begin('/home/tiagofer/.vim/bundles')
 
     " Let dein manage dein
-    call dein#add('~/.vim/bundles/repos/github.com/Shougo/dein.vim')
+    call dein#add('/home/tiagofer/.vim/bundles/repos/github.com/Shougo/dein.vim')
     call dein#add('Shougo/deoplete.nvim')
 
     " Add or remove your plugins here like this:
     call dein#add('Shougo/neosnippet.vim')
     call dein#add('Shougo/neosnippet-snippets')
+
+    " Vim Table Mode
+    call dein#add('dhruvasagar/vim-table-mode')
 
     " Nvim plugins
     if !has('nvim')
@@ -73,8 +76,8 @@ if dein#load_state('~/.vim/bundles')
     call dein#add('maxbrunsfeld/vim-yankstack')
     call dein#add('amix/vim-zenroom2')
     call dein#add('mattn/emmet-vim')
- 
-
+    
+   
     call dein#end()
     call dein#save_state()
 endif
@@ -239,6 +242,13 @@ syntax on
 if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
+
+try
+    colorscheme onehalfdark 
+catch
+endtry
+
+set background=dark
 
 " Set extra options when running in GUI mode
 if has("gui_running")
