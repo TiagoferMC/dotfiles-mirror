@@ -31,10 +31,16 @@ rm installer.sh
 
 # BlackArch
 
+# Submodules Init
+bash tools/submodules-init.sh
+
 # Copy Files
 echo Copying files...
 cp -r homedir/. ~
 sudo cp -r etc/* /etc
+
+# Submodules RM
+bash tools/submodules-rm.sh
 
 # Init Files
 . ~/.profile
