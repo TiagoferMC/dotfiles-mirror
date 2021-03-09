@@ -2,7 +2,7 @@
 
 # Packages
 pkg update && pkg upgrade
-pkg install curl wget vim neovim openssh tmux zsh python nodejs git
+pkg install curl wget vim neovim openssh tmux zsh python nodejs yarn ruby git
 
 # Pip packages
 pip install --upgrade pip
