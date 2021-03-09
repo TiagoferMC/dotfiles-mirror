@@ -26,6 +26,9 @@ if dein#load_state('/home/tiagofer/.vim/bundles')
         call dein#add('roxma/vim-hug-neovim-rpc')
     endif
 
+    " Markdown-Preview
+    call dein#add('iamcco/markdown-preview.nvim', {'on_ft': ['markdown', 'pandoc.markdown', 'rmd'], 'build': 'sh -c "cd app && yarn install"' })
+
     " Theme
     call dein#add('sonph/onehalf', {'rtp': 'vim'})
 
@@ -731,7 +734,6 @@ let vim_markdown_folding_disabled = 1
 
 
 """"" From amix's plugins_config.vim """""
-
 
 let g:snipMate = { 'snippet_version' : 1 }
 

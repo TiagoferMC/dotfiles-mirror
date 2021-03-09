@@ -2,7 +2,7 @@
 
 # Packages
 sudo pacman -Syu
-sudo pacman -S curl wget vi vim neovim openssh tmux zsh python nodejs npm git ruby ttf-fira-code woff-fira-code woff2-fira-code dnscrypt-proxy dnscrypt-proxy-openrc networkmanager
+sudo pacman -S curl wget vi vim neovim openssh tmux zsh python nodejs npm yarn git ruby ttf-fira-code woff-fira-code woff2-fira-code dnscrypt-proxy dnscrypt-proxy-openrc networkmanager
 
 # Pip packages
 pip install --upgrade pip
