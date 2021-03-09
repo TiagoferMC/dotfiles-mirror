@@ -31,14 +31,6 @@ rm installer.sh
 
 # BlackArch
 
-# Git
-git config --global user.name "Tiagofer"
-git config --global user.email "tiagofer@me.com"
-git config --global commit.gpgsign true
-git config --global tag.gpgsign true
-git config --global pull.rebase false
-
-
 # Copy Files
 echo Copying files...
 cp -r homedir/. ~
