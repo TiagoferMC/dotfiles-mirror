@@ -1,0 +1,12 @@
+[submodule "homedir/Suckless/dmenu"]
+	path = homedir/Suckless/dmenu
+	url = git@gitlab.com:Tiagofer/dmenu.git
+[submodule "homedir/Suckless/dwm"]
+	path = homedir/Suckless/dwm
+	url = git@gitlab.com:Tiagofer/dwm.git
+[submodule "homedir/Suckless/dwmblocks"]
+	path = homedir/Suckless/dwmblocks
+	url = git@gitlab.com:Tiagofer/dwmblocks.git
+[submodule "homedir/Suckless/st"]
+	path = homedir/Suckless/st
+	url = git@gitlab.com:Tiagofer/st.git
