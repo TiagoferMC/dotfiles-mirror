@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/tiagofer/.oh-my-zsh"
+export ZSH="/data/data/com.termux/files/home/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -68,11 +68,9 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo z)
+plugins=(git sudo z zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
-
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # User configuration
 
@@ -104,8 +102,6 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 alias cl="clear"
 alias v="nvim"
-alias wifi=". /home/tiagofer/Scripts/WiFi/wifi.sh"
-alias mullvpn=". /home/tiagofer/Scripts/VPN/mullvad.sh"
 alias mongod-auth="sudo mongod --auth"
 alias mongo-connect="mongo --authenticationDatabase 'admin' -u 'tiagofer' -p"
 alias zeronetconfig="sudo -u zeronet python /opt/zeronet/zeronet.py --config_file /etc/zeronet.conf"
@@ -154,7 +150,7 @@ alias \
 
 # Environment Variables
 
-export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.local/bin/statusbar/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin
+#export PATH=$PATH:
 
 # Git Stuff (Used Here Especially Because Remote SSH)
 export GPG_TTY=$(tty)
