@@ -30,10 +30,11 @@
                 "fork-ps-5": true,
                 "fork-es-2": false,
                 "fork-es-3": true,
-                "fork-wp-1": false,
+                "fork-wp-1": true,
                 "fork-wp-2": false,
                 "fork-beta": true,
-                "reactDevTools": false
+                "reactDevTools": false,
+                "transparency": true
             },
             "plugins": {
                 "BugReportHelper": true,
@@ -72,7 +73,11 @@
                 "VoiceUsersCounter": true,
                 "EmojiUtilities": true
             },
-            "themes": {}
+            "themes": {
+                "Dusk to Dawn": true,
+                "Discolored": true,
+                "BasicBackground": false
+            }
         },
         "canary": {},
         "ptb": {}
