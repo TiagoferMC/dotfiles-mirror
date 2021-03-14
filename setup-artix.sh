@@ -28,6 +28,9 @@ sh ./installer.sh ~/.vim/bundles
 rm installer.sh
 
 # AUR
+# TODO
+# Add Chaoritc AUR and j-aur
+#paru -Syu discord betterdiscordctl-git betterdiscord-rauenzi-git
 
 # BlackArch
 
