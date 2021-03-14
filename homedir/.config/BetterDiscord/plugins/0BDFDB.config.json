@@ -1,0 +1,25 @@
+{
+	"changeLogs": {
+		"BDFDB": "1.4.6",
+		"BetterFriendList": "1.3.2",
+		"CharCounter": "1.5.0",
+		"CopyRawMessage": "1.1.2",
+		"CustomStatusPresets": "1.0.5",
+		"FriendNotifications": "1.6.3",
+		"GoogleTranslateOption": "2.1.6",
+		"ImageUtilities": "4.3.4",
+		"SendLargeMessages": "1.6.6",
+		"ServerCounter": "1.0.3",
+		"ServerDetails": "1.0.4",
+		"ShowHiddenChannels": "2.9.3",
+		"TopRoleEverywhere": "3.0.5"
+	},
+	"choices": {
+		"toastPosition": "right"
+	},
+	"general": {
+		"showToasts": true,
+		"showSupportBadges": true,
+		"useChromium": false
+	}
+}

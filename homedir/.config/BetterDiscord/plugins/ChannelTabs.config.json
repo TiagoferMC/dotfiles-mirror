@@ -1,0 +1,38 @@
+{
+    "didShowIssueHelperPopup": true,
+    "currentVersionInfo": {
+        "version": "2.4.1",
+        "hasShownChangelog": true
+    },
+    "settings": {
+        "tabs": [
+            {
+                "name": "#tavern",
+                "url": "/channels/696612527861137438/696612528993730592",
+                "selected": true,
+                "iconUrl": "https://cdn.discordapp.com/icons/696612527861137438/2a7e7da9622633f38af390d20a85adb2.webp?size=128",
+                "channelId": "696612528993730592"
+            },
+            {
+                "name": "@Victorian Queendom",
+                "url": "/channels/@me/674604932737007626",
+                "selected": false,
+                "iconUrl": "https://cdn.discordapp.com/avatars/619999922028281856/bf9a87e7476a2c0e7fbcdd26d8d90e12.png?size=128",
+                "channelId": "674604932737007626"
+            }
+        ],
+        "favs": [
+            {
+                "name": "#garden🌱⚘",
+                "iconUrl": "https://cdn.discordapp.com/icons/764975475117522964/552558408f4c1b40bb84cbdf5f77d39b.webp?size=128",
+                "url": "/channels/764975475117522964/777961264386146324",
+                "channelId": "777961264386146324"
+            }
+        ],
+        "showTabBar": true,
+        "showFavBar": true,
+        "reopenLastChannel": true,
+        "showTabUnreadBadges": true,
+        "showFavUnreadBadges": true
+    }
+}

@@ -1,0 +1,33 @@
+{
+	"amounts": {
+		"tooltipDelay": 0,
+		"tooltipWidth": 300,
+		"maxDaysAgo": 0
+	},
+	"choices": {
+		"timeLang": "$discord"
+	},
+	"colors": {
+		"tooltipColor": ""
+	},
+	"formats": {
+		"ownFormat": "$hour: $minute: $second, $day.$month.$year"
+	},
+	"settings": {
+		"addBoosters": true,
+		"addChannels": true,
+		"addCreation": true,
+		"addIcon": true,
+		"addJoin": true,
+		"addMembers": true,
+		"addOwner": true,
+		"addRegion": true,
+		"addRoles": true,
+		"cutSeconds": false,
+		"displayDate": true,
+		"displayTime": true,
+		"forceZeros": true,
+		"otherOrder": false,
+		"useDateInDaysAgo": false
+	}
+}
