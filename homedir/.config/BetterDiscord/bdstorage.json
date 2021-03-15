@@ -75,8 +75,7 @@
             },
             "themes": {
                 "Dusk to Dawn": true,
-                "Discolored": true,
-                "BasicBackground": false
+                "Discolored": true
             }
         },
         "canary": {},
