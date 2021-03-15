@@ -7,11 +7,18 @@
     "settings": {
         "tabs": [
             {
-                "name": "#general",
-                "url": "/channels/317790886664732679/317790886664732679",
+                "name": "#tavern",
+                "url": "/channels/696612527861137438/696612528993730592",
                 "selected": true,
-                "iconUrl": "https://cdn.discordapp.com/icons/317790886664732679/6270379cd9b1014ae667797b0e9b959b.webp?size=128",
-                "channelId": "317790886664732679"
+                "iconUrl": "https://cdn.discordapp.com/icons/696612527861137438/2a7e7da9622633f38af390d20a85adb2.webp?size=128",
+                "channelId": "696612528993730592"
+            },
+            {
+                "name": "@Derpy",
+                "url": "/channels/@me/677528873931505710",
+                "selected": false,
+                "iconUrl": "https://cdn.discordapp.com/avatars/246589957165023232/a_52627bec086f9ce7e093a8abfb0fe295.png?size=128",
+                "channelId": "677528873931505710"
             }
         ],
         "favs": [

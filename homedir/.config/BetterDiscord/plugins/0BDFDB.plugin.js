@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.4.7
+ * @version 1.4.8
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -22,13 +22,16 @@ module.exports = (_ => {
 		"info": {
 			"name": "BDFDB",
 			"author": "DevilBro",
-			"version": "1.4.7",
+			"version": "1.4.8",
 			"description": "Required Library for DevilBro's Plugins"
 		},
 		"rawUrl": `https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js`,
 		"changeLog": {
 			"added": {
 				"Date Input Component": "Added new Internal Component for Plugins like CreationDate, CompleteTimestamps etc."
+			},
+			"fixed": {
+				"Date Input Component 12h Mode": ""
 			}
 		}
 	};
@@ -5644,7 +5647,9 @@ module.exports = (_ => {
 														"$m will be replaced with the Month",
 														"$mm will be replaced with the Month (Forced Zeros)",
 														"$yy will be replaced with the Year (2-Digit)",
-														"$yyyy will be replaced with the Year (4-Digit)"
+														"$yyyy will be replaced with the Year (4-Digit)",
+														"$month will be replaced with the Month Name",
+														"$monthS will be replaced with the Month Name (Short Form)",
 													].join("\n"),
 													onChange: value => {
 														this.props.dateString = value;
@@ -5738,8 +5743,8 @@ module.exports = (_ => {
 					const date = strings.dateString && typeof strings.dateString == "string" ? InternalComponents.LibraryComponents.DateInput.formatDate(strings.dateString, timeObj) : timeObj.toLocaleDateString(language);
 					return (strings.formatString || InternalComponents.LibraryComponents.DateInput.getDefaultString())
 						.replace(/\$date/g, date)
-						.replace(/\$time12/g, strings.timeString && typeof strings.timeString == "string" ? InternalComponents.LibraryComponents.DateInput.formatTime(strings.timeString, timeObj, true) : timeObj.toLocaleTimeString(language, {hour12: true}))
-						.replace(/\$time/g, strings.timeString && typeof strings.timeString == "string" ? InternalComponents.LibraryComponents.DateInput.formatTime(strings.timeString, timeObj) : timeObj.toLocaleTimeString(language))
+						.replace(/\$time12/g, strings.timeString && typeof strings.timeString == "string" ? InternalComponents.LibraryComponents.DateInput.formatTime(strings.timeString, timeObj, true) : timeObj.toLocaleTimeString(language, {hourCycle: "h12"}))
+						.replace(/\$time/g, strings.timeString && typeof strings.timeString == "string" ? InternalComponents.LibraryComponents.DateInput.formatTime(strings.timeString, timeObj) : timeObj.toLocaleTimeString(language, {hourCycle: "h24"}))
 						.replace(/\$monthS/g, timeObj.toLocaleDateString(language, {month: "short"}))
 						.replace(/\$month/g, timeObj.toLocaleDateString(language, {month: "long"}))
 						.replace(/\$dayS/g, timeObj.toLocaleDateString(language, {weekday: "short"}))
@@ -5750,10 +5755,13 @@ module.exports = (_ => {
 				InternalComponents.LibraryComponents.DateInput.formatDate = function (string, time) {
 					if (!string || typeof string != "string" || !time) return "";
 					const timeObj = InternalComponents.LibraryComponents.DateInput.parseDate(time);
+					const language = BDFDB.LanguageUtils.getLanguage().id;
 					const day = timeObj.getDate();
 					const month = timeObj.getMonth()+1;
 					const year = timeObj.getFullYear();
 					return string
+						.replace(/\$monthS/g, timeObj.toLocaleDateString(language, {month: "short"}))
+						.replace(/\$month/g, timeObj.toLocaleDateString(language, {month: "long"}))
 						.replace(/\$dd/g, day < 10 ? `0${day}` : day)
 						.replace(/\$d/g, day)
 						.replace(/\$mm/g, month < 10 ? `0${month}` : month)
@@ -5764,6 +5772,7 @@ module.exports = (_ => {
 				InternalComponents.LibraryComponents.DateInput.formatTime = function (string, time, hour12) {
 					if (!string || typeof string != "string" || !time) return "";
 					const timeObj = InternalComponents.LibraryComponents.DateInput.parseDate(time);
+					const language = BDFDB.LanguageUtils.getLanguage().id;
 					let hours = timeObj.getHours();
 					if (hour12 && hours > 12) hours -= 12;
 					const minutes = timeObj.getMinutes();
@@ -5778,7 +5787,7 @@ module.exports = (_ => {
 						.replace(/\$s/g, seconds)
 						.replace(/\$uu/g, milli < 10 ? `00${seconds}` : milli < 100 ? `0${milli}` : milli)
 						.replace(/\$u/g, milli);
-					return hour12 ? timeObj.toLocaleTimeString(BDFDB.LanguageUtils.getLanguage().id, {hour12: true}).replace(/\d{1,2}[^\d]\d{1,2}[^\d]\d{1,2}/g, string) : string;
+					return hour12 ? timeObj.toLocaleTimeString(language, {hourCycle: "h12"}).replace(/\d{1,2}[^\d]\d{1,2}[^\d]\d{1,2}/g, string) : string;
 				};
 				
 				InternalComponents.LibraryComponents.EmojiPickerButton = reactInitialized && class BDFDB_EmojiPickerButton extends LibraryModules.React.Component {
