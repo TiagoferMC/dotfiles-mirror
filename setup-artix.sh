@@ -30,7 +30,7 @@ rm installer.sh
 # AUR
 # TODO
 # Add Chaoritc AUR and j-aur
-#paru -Syu discord betterdiscordctl-git betterdiscord-rauenzi-git
+#paru -Syu discord betterdiscordctl-git betterdiscord-rauenzi-git viu fim lsix
 
 # BlackArch
 
