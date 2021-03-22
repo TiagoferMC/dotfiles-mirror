@@ -3,6 +3,9 @@
 		"toastTime": 5,
 		"checkInterval": 10
 	},
+	"dates": {
+		"logDate": {}
+	},
 	"friends": {
 		"117878923370430464": {
 			"custom": 1,
@@ -111,18 +114,6 @@
 			"online": 1,
 			"playing": 1,
 			"streaming": 1
-		},
-		"264038812219473921": {
-			"custom": 1,
-			"disabled": true,
-			"dnd": 0,
-			"idle": 0,
-			"listening": 0,
-			"mobile": 1,
-			"offline": 0,
-			"online": 1,
-			"playing": 0,
-			"streaming": 0
 		},
 		"274517698803793921": {
 			"custom": 1,
@@ -485,6 +476,20 @@
 			"streaming": 0
 		}
 	},
+	"nonfriends": {
+		"264038812219473921": {
+			"custom": 1,
+			"disabled": true,
+			"dnd": 0,
+			"idle": 0,
+			"listening": 0,
+			"mobile": 1,
+			"offline": 0,
+			"online": 1,
+			"playing": 0,
+			"streaming": 0
+		}
+	},
 	"notificationsounds": {
 		"toastonline": {
 			"url": null,
@@ -569,9 +574,9 @@
 	},
 	"settings": {
 		"addOnlineCount": true,
+		"showDiscriminator": true,
 		"disableForNew": true,
 		"muteOnDND": true,
-		"openOnClick": true,
-		"showDiscriminator": true
+		"openOnClick": true
 	}
 }

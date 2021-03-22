@@ -2,7 +2,7 @@
  * @name BDFDB
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.4.8
+ * @version 1.5.0
  * @description Required Library for DevilBro's Plugins
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -22,16 +22,13 @@ module.exports = (_ => {
 		"info": {
 			"name": "BDFDB",
 			"author": "DevilBro",
-			"version": "1.4.8",
+			"version": "1.5.0",
 			"description": "Required Library for DevilBro's Plugins"
 		},
 		"rawUrl": `https://mwittrien.github.io/BetterDiscordAddons/Library/0BDFDB.plugin.js`,
 		"changeLog": {
-			"added": {
-				"Date Input Component": "Added new Internal Component for Plugins like CreationDate, CompleteTimestamps etc."
-			},
-			"fixed": {
-				"Date Input Component 12h Mode": ""
+			"improved": {
+				"Select Component": "Switched the old Dropdown Select Component with Discord's New Version"
 			}
 		}
 	};
@@ -4066,13 +4063,13 @@ module.exports = (_ => {
 					}
 				};
 				BDFDB.DiscordUtils.isDevModeEnabled = function () {
-					return (LibraryModules.StoreChangeUtils.get("UserSettingsStore") || {}).developerMode;
+					return LibraryModules.SettingsStore.developerMode;
 				};
 				BDFDB.DiscordUtils.getTheme = function () {
-					return (LibraryModules.StoreChangeUtils.get("UserSettingsStore") || {}).theme != "dark" ? BDFDB.disCN.themelight : BDFDB.disCN.themedark;
+					return LibraryModules.SettingsStore.theme != "dark" ? BDFDB.disCN.themelight : BDFDB.disCN.themedark;
 				};
 				BDFDB.DiscordUtils.getMode = function () {
-					return (LibraryModules.StoreChangeUtils.get("UserSettingsStore") || {}).message_display_compact ? "compact" : "cozy";
+					return LibraryModules.SettingsStore.messageDisplayCompact ? "compact" : "cozy";
 				};
 				BDFDB.DiscordUtils.getZoomFactor = function () {
 					let aRects = BDFDB.DOMUtils.getRects(document.querySelector(BDFDB.dotCN.appmount));
@@ -4274,13 +4271,13 @@ module.exports = (_ => {
 				BDFDB.LanguageUtils = {};
 				BDFDB.LanguageUtils.languages = Object.assign({}, InternalData.Languages);
 				BDFDB.LanguageUtils.getLanguage = function () {
-					let lang = LibraryModules.LanguageStore.chosenLocale || "en";
+					let lang = LibraryModules.LanguageStore.chosenLocale || LibraryModules.SettingsStore.locale || "en";
 					if (lang == "en-GB" || lang == "en-US") lang = "en";
 					let langIds = lang.split("-");
 					let langId = langIds[0];
 					let langId2 = langIds[1] || "";
 					lang = langId2 && langId.toUpperCase() !== langId2.toUpperCase() ? langId + "-" + langId2 : langId;
-					return BDFDB.LanguageUtils.languages[lang] || BDFDB.LanguageUtils.languages[langId] || BDFDB.LanguageUtils.languages["en"];
+					return BDFDB.LanguageUtils.languages[lang] || BDFDB.LanguageUtils.languages[langId] || BDFDB.LanguageUtils.languages.en;
 				};
 				BDFDB.LanguageUtils.LanguageStrings = new Proxy(LanguageStrings, {
 					get: function (list, item) {
@@ -4679,7 +4676,7 @@ module.exports = (_ => {
 				InternalComponents.LibraryComponents.Badges.IconBadge = reactInitialized && class BDFDB_IconBadge extends LibraryModules.React.Component {
 					render() {
 						return BDFDB.ReactUtils.createElement("div", {
-							className: BDFDB.DOMUtils.formatClassName(BDFDB.disCN.badgeiconbadge, this.props.className),
+							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.badgeiconbadge, this.props.shape && InternalComponents.LibraryComponents.Badges.BadgeShapes[this.props.shape] || InternalComponents.LibraryComponents.Badges.BadgeShapes.ROUND),
 							style: Object.assign({
 								backgroundColor: this.props.disableColor ? null : (this.props.color || BDFDB.DiscordConstants.Colors.STATUS_RED)
 							}, this.props.style),
@@ -4697,7 +4694,7 @@ module.exports = (_ => {
 					handleMouseLeave(e) {if (typeof this.props.onMouseLeave == "function") this.props.onMouseLeave(e, this);}
 					render() {
 						return BDFDB.ReactUtils.createElement("div", {
-							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.badgenumberbadge),
+							className: BDFDB.DOMUtils.formatClassName(this.props.className, BDFDB.disCN.badgenumberbadge, this.props.shape && InternalComponents.LibraryComponents.Badges.BadgeShapes[this.props.shape] || InternalComponents.LibraryComponents.Badges.BadgeShapes.ROUND),
 							style: Object.assign({
 								backgroundColor: !this.props.disableColor && (this.props.color || BDFDB.DiscordConstants.Colors.STATUS_RED),
 								width: InternalComponents.LibraryComponents.Badges.getBadgeWidthForValue(this.props.count),
@@ -5685,7 +5682,8 @@ module.exports = (_ => {
 													"$monthS will be replaced with the Month Name (Short Form)",
 													"$day will be replaced with the Weekday Name",
 													"$dayS will be replaced with the Weekday Name (Short Form)",
-													"$agoAmount will be replaced with ('Today', 'Yesterday', '2 days ago')",
+													"$agoAmount will be replaced with ('Today', 'Yesterday', 'x days/weeks/months ago')",
+													"$agoDays will be replaced with ('Today', 'Yesterday', 'x days ago')",
 													"$agoDate will be replaced with ('Today', 'Yesterday', $date)"
 												].join("\n"))
 											]
@@ -5724,7 +5722,7 @@ module.exports = (_ => {
 				InternalComponents.LibraryComponents.DateInput.getDefaultString = function () {
 					const language = BDFDB.LanguageUtils.getLanguage().id;
 					const date = new Date();
-					return date.toLocaleString(language).replace(date.toLocaleDateString(language), "$date").replace(date.toLocaleTimeString(language), "$time");
+					return date.toLocaleString(language).replace(date.toLocaleDateString(language), "$date").replace(date.toLocaleTimeString(language, {hourCycle: "h12"}), "$time12").replace(date.toLocaleTimeString(language, {hourCycle: "h11"}), "$time12").replace(date.toLocaleTimeString(language, {hourCycle: "h24"}), "$time").replace(date.toLocaleTimeString(language, {hourCycle: "h23"}), "$time");
 				};
 				InternalComponents.LibraryComponents.DateInput.parseDate = function (date) {
 					let timeObj = typeof date == "string" || typeof date == "number" ? new Date(date) : date;
@@ -5744,12 +5742,13 @@ module.exports = (_ => {
 					return (strings.formatString || InternalComponents.LibraryComponents.DateInput.getDefaultString())
 						.replace(/\$date/g, date)
 						.replace(/\$time12/g, strings.timeString && typeof strings.timeString == "string" ? InternalComponents.LibraryComponents.DateInput.formatTime(strings.timeString, timeObj, true) : timeObj.toLocaleTimeString(language, {hourCycle: "h12"}))
-						.replace(/\$time/g, strings.timeString && typeof strings.timeString == "string" ? InternalComponents.LibraryComponents.DateInput.formatTime(strings.timeString, timeObj) : timeObj.toLocaleTimeString(language, {hourCycle: "h24"}))
+						.replace(/\$time/g, strings.timeString && typeof strings.timeString == "string" ? InternalComponents.LibraryComponents.DateInput.formatTime(strings.timeString, timeObj) : timeObj.toLocaleTimeString(language, {hourCycle: "h23"}))
 						.replace(/\$monthS/g, timeObj.toLocaleDateString(language, {month: "short"}))
 						.replace(/\$month/g, timeObj.toLocaleDateString(language, {month: "long"}))
 						.replace(/\$dayS/g, timeObj.toLocaleDateString(language, {weekday: "short"}))
 						.replace(/\$day/g, timeObj.toLocaleDateString(language, {weekday: "long"}))
 						.replace(/\$agoAmount/g, daysAgo > 1 ? BDFDB.LanguageUtils.LanguageStringsFormat(`GAME_LIBRARY_LAST_PLAYED_${daysAgo > 80 ? "MONTHS" : daysAgo > 30 ? "WEEKS" : "DAYS"}`, daysAgo > 80 ? Math.round(daysAgo/30) : daysAgo > 30 ? Math.round(daysAgo/7) : daysAgo) : BDFDB.LanguageUtils.LanguageStrings[`SEARCH_SHORTCUT_${daysAgo == 1 ? "YESTERDAY" : "TODAY"}`])
+						.replace(/\$agoDays/g, daysAgo > 1 ? BDFDB.LanguageUtils.LanguageStringsFormat(`GAME_LIBRARY_LAST_PLAYED_DAYS`, daysAgo) : BDFDB.LanguageUtils.LanguageStrings[`SEARCH_SHORTCUT_${daysAgo == 1 ? "YESTERDAY" : "TODAY"}`])
 						.replace(/\$agoDate/g, daysAgo > 1 ? date : BDFDB.LanguageUtils.LanguageStrings[`SEARCH_SHORTCUT_${daysAgo == 1 ? "YESTERDAY" : "TODAY"}`]);
 				};
 				InternalComponents.LibraryComponents.DateInput.formatDate = function (string, time) {
@@ -5774,7 +5773,10 @@ module.exports = (_ => {
 					const timeObj = InternalComponents.LibraryComponents.DateInput.parseDate(time);
 					const language = BDFDB.LanguageUtils.getLanguage().id;
 					let hours = timeObj.getHours();
-					if (hour12 && hours > 12) hours -= 12;
+					if (hour12) {
+						hours = hours == 0 ? 12 : hours;
+						if (hours > 12) hours -= 12;
+					}
 					const minutes = timeObj.getMinutes();
 					const seconds = timeObj.getSeconds();
 					const milli = timeObj.getMilliseconds();
@@ -5900,7 +5902,7 @@ module.exports = (_ => {
 												children: this.props.title
 											})
 										}) : null
-									].concat([this.props.titlechildren].flat(10)).filter(n => n)
+									].concat([this.props.titleChildren].flat(10)).filter(n => n)
 								}),
 							].concat(this.props.children)
 						});
@@ -6619,7 +6621,6 @@ module.exports = (_ => {
 					}
 				};
 				
-				let NativeSubSelectExport = (BDFDB.ModuleUtils.find(m => m == InternalComponents.NativeSubComponents.Select, false) || {exports: {}}).exports;
 				InternalComponents.LibraryComponents.Select = reactInitialized && class BDFDB_Select extends LibraryModules.React.Component {
 					handleChange(value) {
 						this.props.value = value.value || value;
@@ -6627,14 +6628,12 @@ module.exports = (_ => {
 						BDFDB.ReactUtils.forceUpdate(this);
 					}
 					render() {
-						let lightTheme = BDFDB.DiscordUtils.getTheme() == BDFDB.disCN.themelight;
-						return BDFDB.ReactUtils.createElement(InternalComponents.LibraryComponents.Flex, {
+						return BDFDB.ReactUtils.createElement("div", {
 							className: BDFDB.disCN.selectwrapper,
-							direction: InternalComponents.LibraryComponents.Flex.Direction.HORIZONTAL,
-							align: InternalComponents.LibraryComponents.Flex.Align.CENTER,
-							children: BDFDB.ReactUtils.createElement(InternalComponents.NativeSubComponents.Select, Object.assign({}, this.props, {
-								lightThemeColorOverrides: NativeSubSelectExport[lightTheme ? "LIGHT_THEME_COLORS" : "DARK_THEME_COLORS"],
-								darkThemeColorOverrides: NativeSubSelectExport[lightTheme ? "LIGHT_THEME_COLORS" : "DARK_THEME_COLORS"],
+							children: BDFDB.ReactUtils.createElement(InternalComponents.NativeSubComponents.SearchableSelect, Object.assign({}, this.props, {
+								autoFocus: this.props.autoFocus ? this.props.autoFocus : false,
+								maxVisibleItems: this.props.maxVisibleItems || 7,
+								renderOptionLabel: this.props.optionRenderer,
 								onChange: this.handleChange.bind(this)
 							}))
 						});

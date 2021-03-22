@@ -1,6 +1,6 @@
 {
     "currentVersionInfo": {
-        "version": "2.3.10",
+        "version": "2.3.11",
         "hasShownChangelog": true
     },
     "settings": {
@@ -17,8 +17,8 @@
             "fullwidth": true,
             "upsidedown": true,
             "varied": true,
-            "leet": true,
-            "thicc": true
+            "leet": false,
+            "thicc": false
         },
         "formats": {
             "superscript": true,

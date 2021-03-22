@@ -7,18 +7,11 @@
     "settings": {
         "tabs": [
             {
-                "name": "#tavern",
-                "url": "/channels/696612527861137438/696612528993730592",
+                "name": "#jesters-court",
+                "url": "/channels/696612527861137438/718660466238554152",
                 "selected": true,
                 "iconUrl": "https://cdn.discordapp.com/icons/696612527861137438/2a7e7da9622633f38af390d20a85adb2.webp?size=128",
-                "channelId": "696612528993730592"
-            },
-            {
-                "name": "@Derpy",
-                "url": "/channels/@me/677528873931505710",
-                "selected": false,
-                "iconUrl": "https://cdn.discordapp.com/avatars/246589957165023232/a_52627bec086f9ce7e093a8abfb0fe295.png?size=128",
-                "channelId": "677528873931505710"
+                "channelId": "718660466238554152"
             }
         ],
         "favs": [

@@ -13,6 +13,10 @@
 			"!"
 		]
 	},
+	"general": {
+		"addTranslateButton": true,
+		"sendOriginalMessage": false
+	},
 	"settings": {
 		"addTranslateButton": true,
 		"sendOriginalMessage": false

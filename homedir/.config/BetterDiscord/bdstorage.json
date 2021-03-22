@@ -51,7 +51,7 @@
                 "CharCounter": true,
                 "CopyRawMessage": true,
                 "BetterFriendList": true,
-                "ChannelTabs": true,
+                "ChannelTabs": false,
                 "CustomStatusPresets": true,
                 "PermissionsViewer": true,
                 "BetterFormattingRedux": true,
@@ -75,7 +75,8 @@
             },
             "themes": {
                 "Dusk to Dawn": true,
-                "Discolored": true
+                "Discolored": true,
+                "RadialStatus": true
             }
         },
         "canary": {},
@@ -83,5 +84,5 @@
     },
     "version": "0.3.5",
     "emoteCacheDays": 7,
-    "emoteCacheDate": "2021-03-10T18:46:18.045Z"
+    "emoteCacheDate": "2021-03-18T20:05:09.331Z"
 }
