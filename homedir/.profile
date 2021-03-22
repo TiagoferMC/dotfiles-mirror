@@ -15,6 +15,9 @@ export LC_CTYPE="C"
 
 # dwmblocks &
 
+# For fim
+export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
+
 # Other program settings:
 export DICS="/usr/share/stardict/dic/"
 export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"

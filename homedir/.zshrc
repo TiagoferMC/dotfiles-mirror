@@ -159,3 +159,5 @@ export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.local/bin/statusbar
 # Git Stuff (Used Here Especially Because Remote SSH)
 export GPG_TTY=$(tty)
 
+# For fim
+export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
