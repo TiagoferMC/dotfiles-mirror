@@ -6,6 +6,5 @@
     "tabWidth": 4,
     "singleQuote": true,
     "prefer-arrow-callback": "off",
-    "esversion": 6
   }
 }
