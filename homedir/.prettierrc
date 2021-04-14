@@ -10,7 +10,7 @@ bracketSpacing: true
 jsxBracketSameLine: true
 arrowParens: "avoid"
 requirePragma: false
-insertPragma: flase
+insertPragma: false
 proseWrap: "preserve"
 htmlWhitespaceSensitivity: "css"
 vueIndentScriptAndStyle: false
