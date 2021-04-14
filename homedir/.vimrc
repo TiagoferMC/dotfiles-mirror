@@ -857,6 +857,11 @@ let g:ale_linters = {
 \   'go': ['go', 'golint', 'errcheck']
 \}
 
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\}
+
 nmap <silent> <leader>a <Plug>(ale_next_wrap)
 
 " Disabling highlighting
