@@ -47,7 +47,7 @@ mod1 + shift + p; {t, v, l, m, d, e, s}
     {st -e htop, \
      st -e nvim, \
      st -e links ddg.gg, \
-     mullvad-vpn, \
+     musescore, \
      discord,  \
      element-desktop, \
      steam}
