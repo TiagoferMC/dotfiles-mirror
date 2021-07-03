@@ -43,19 +43,15 @@ mod1 + shift + m
 mod1 + p
     dmenu_run
 
-mod1 + shift + p; {t, v, l, m, d, e, s}
+mod1 + shift + p; {t, v, l, m, d, e, s, b}
     {st -e htop, \
      st -e nvim, \
      st -e links ddg.gg, \
      musescore, \
      discord,  \
      element-desktop, \
-     steam}
-
-mod1 + shift + p; b; {b, c, v}
-    {firefox, \
-     chromium, \
-     qutebrowser}
+     steam, \
+     firefox}
 
 mod1 + shift + p; f; {f, v, d}
     {dmenufm, \
