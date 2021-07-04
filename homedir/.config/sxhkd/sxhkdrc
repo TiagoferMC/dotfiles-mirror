@@ -38,7 +38,7 @@ mod1 + shift + Sys_Req; t
     st -e /home/tiagofer/Projects/turtleScreencap/turtleWatch.sh
 
 mod1 + shift + m
-    st -e sh -c 'cd ~ ; fastfetch ; $SHELL'
+    st -e sh -c 'cd ~ ; flashfetch ; $SHELL'
 
 mod1 + p
     dmenu_run
