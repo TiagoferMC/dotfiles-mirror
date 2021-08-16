@@ -161,3 +161,6 @@ export GPG_TTY=$(tty)
 
 # For fim
 export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
+
+# PyEnv
+eval "$(pyenv init -)"

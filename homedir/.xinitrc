@@ -12,6 +12,9 @@ sxhkd &
 # Other Things
 . ./.profile
 
+# Audio
+setsid -f pipewire
+
 # Window Manager
 setsid -f dunst
 setsid -f dwmblocks

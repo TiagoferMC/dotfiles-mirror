@@ -80,7 +80,9 @@ if dein#load_state('/home/tiagofer/.vim/bundles')
     call dein#add('amix/vim-zenroom2')
     call dein#add('mattn/emmet-vim')
     
-   
+    # Suppercollider
+    call dein#add('supercollider/scvim')
+
     call dein#end()
     call dein#save_state()
 endif
