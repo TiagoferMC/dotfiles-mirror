@@ -1,18 +1,23 @@
 {
 	"changeLogs": {
-		"BDFDB": "1.5.0",
-		"BetterFriendList": "1.3.2",
-		"CharCounter": "1.5.0",
+		"BDFDB": "1.8.3",
+		"BetterFriendList": "1.3.8",
+		"BetterNsfwTag": "1.2.7",
+		"BetterSearchPage": "1.2.0",
+		"CharCounter": "1.5.6",
 		"CopyRawMessage": "1.1.2",
-		"CustomStatusPresets": "1.0.5",
-		"FriendNotifications": "1.6.5",
-		"GoogleTranslateOption": "2.1.7",
-		"ImageUtilities": "4.3.4",
-		"SendLargeMessages": "1.6.6",
+		"CreationDate": "1.4.6",
+		"CustomStatusPresets": "1.0.7",
+		"FriendNotifications": "1.7.7",
+		"GameActivityToggle": "1.0.4",
+		"GoogleSearchReplace": "1.3.1",
+		"ImageUtilities": "4.4.6",
 		"ServerCounter": "1.0.3",
-		"ServerDetails": "1.0.5",
-		"ShowHiddenChannels": "2.9.3",
-		"TopRoleEverywhere": "3.0.5"
+		"ShowConnections": "1.0.6",
+		"ShowHiddenChannels": "3.0.2",
+		"SplitLargeMessages": "1.7.0",
+		"TopRoleEverywhere": "3.0.7",
+		"Translator": "2.3.2"
 	},
 	"choices": {
 		"toastPosition": "right"
@@ -21,5 +26,9 @@
 		"showToasts": true,
 		"showSupportBadges": true,
 		"useChromium": false
+	},
+	"hashes": {
+		"0BDFDB.data.json": "a029ce9e09949f281680488a6118c5ee0509b1b9",
+		"0BDFDB.raw.css": "30a50e58a729a55a102828c0a937e5b8bd609d81"
 	}
 }

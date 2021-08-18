@@ -1,0 +1,54 @@
+{
+    "settings": {
+        "tabs": [
+            {
+                "name": "#sunday-funnies",
+                "url": "/channels/696612527861137438/718660466238554152",
+                "selected": true,
+                "currentStatus": "none",
+                "iconUrl": "https://cdn.discordapp.com/icons/696612527861137438/ac73073b7e6ab5b13247150ffd463f46.webp?size=128",
+                "channelId": "718660466238554152"
+            }
+        ],
+        "favs": [
+            {
+                "name": "@Derpy",
+                "iconUrl": "https://cdn.discordapp.com/avatars/246589957165023232/a_52627bec086f9ce7e093a8abfb0fe295.gif?size=128",
+                "url": "/channels/@me/677528873931505710",
+                "channelId": "677528873931505710",
+                "groupId": -1
+            },
+            {
+                "name": "#garden🌱⚘",
+                "iconUrl": "https://cdn.discordapp.com/icons/764975475117522964/552558408f4c1b40bb84cbdf5f77d39b.webp?size=128",
+                "url": "/channels/764975475117522964/777961264386146324",
+                "channelId": "777961264386146324",
+                "groupId": -1
+            }
+        ],
+        "favGroups": [],
+        "showTabBar": true,
+        "showFavBar": true,
+        "reopenLastChannel": true,
+        "showFavUnreadBadges": true,
+        "showFavMentionBadges": true,
+        "showFavTypingBadge": true,
+        "showEmptyFavBadges": true,
+        "showTabUnreadBadges": true,
+        "showTabMentionBadges": true,
+        "showTabTypingBadge": true,
+        "showEmptyTabBadges": false,
+        "showActiveTabUnreadBadges": false,
+        "showActiveTabMentionBadges": false,
+        "showActiveTabTypingBadge": false,
+        "showEmptyActiveTabBadges": false,
+        "compactStyle": true,
+        "privacyMode": false,
+        "showFavGroupUnreadBadges": true,
+        "showFavGroupMentionBadges": true,
+        "showFavGroupTypingBadge": true,
+        "showEmptyFavGroupBadges": true,
+        "showQuickSettings": true,
+        "alwaysFocusNewTabs": false
+    }
+}

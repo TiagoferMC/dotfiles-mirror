@@ -1,4 +1,7 @@
 {
+	"general": {
+		"byNewlines": false
+	},
 	"settings": {
 		"byNewlines": true
 	}

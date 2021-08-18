@@ -7,6 +7,7 @@
 		"Baidu": true,
 		"Bing": true,
 		"Google": true,
+		"ImgOps": true,
 		"IQDB": true,
 		"Reddit": true,
 		"SauceNAO": true,
@@ -15,7 +16,7 @@
 		"WhatAnime": true,
 		"Yandex": true
 	},
-	"settings": {
+	"general": {
 		"addDetails": true,
 		"addEmojiEntry": true,
 		"addGroupIconEntry": true,
@@ -30,8 +31,14 @@
 		"showAsHeader": false,
 		"showOnHover": true
 	},
+	"places": {
+		"userAvatars": true,
+		"groupIcons": true,
+		"guildIcons": true,
+		"emojis": true
+	},
 	"zoomSettings": {
-		"lensesize": 200,
-		"zoomlevel": 2
+		"lensSize": 200,
+		"zoomLevel": 2
 	}
 }

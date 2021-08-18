@@ -2,7 +2,7 @@
  * @name CustomStatusPresets
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.0.5
+ * @version 1.0.7
  * @description Allows you to save Custom Statuses as Quick Select
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,17 +17,25 @@ module.exports = (_ => {
 		"info": {
 			"name": "CustomStatusPresets",
 			"author": "DevilBro",
-			"version": "1.0.5",
+			"version": "1.0.7",
 			"description": "Allows you to save Custom Statuses as Quick Select"
 		},
 		"changeLog": {
-			"improved": {
-				"Settings": "You can now reorder the presets in the plugin settings and 'disable' them which stops them from showing in the quick menu"
+			"fixed": {
+				"Status/Overflow": "Fixed some Issues with very long Status causing overflow issues"
 			}
 		}
 	};
 
-	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
+	return (window.Lightcord || window.LightCord) ? class {
+		getName () {return config.info.name;}
+		getAuthor () {return config.info.author;}
+		getVersion () {return config.info.version;}
+		getDescription () {return "Do not use LightCord!";}
+		load () {BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)");}
+		start() {}
+		stop() {}
+	} : !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
 		getName () {return config.info.name;}
 		getAuthor () {return config.info.author;}
 		getVersion () {return config.info.version;}
@@ -68,7 +76,7 @@ module.exports = (_ => {
 		var _this;
 		var presets = {};
 		
-		const CustomStatusInput = class CustomStatusInput extends BdApi.React.Component {
+		const CustomStatusInputComponent = class CustomStatusInput extends BdApi.React.Component {
 			handleChange() {
 				this.props.onChange(this.props);
 			}
@@ -112,7 +120,7 @@ module.exports = (_ => {
 			}
 		};
 		
-		const SortableList = class SortableList extends BdApi.React.Component {
+		const SortableListComponent = class SortableList extends BdApi.React.Component {
 			createDragPreview(div, event) {
 				if (!Node.prototype.isPrototypeOf(div)) return;
 				let dragPreview = div.cloneNode(true);
@@ -131,7 +139,9 @@ module.exports = (_ => {
 				this.props.dragPreview.style.setProperty("top", event.clientY - 25 + "px", "important");
 			}
 			render() {
-				return Object.keys(BDFDB.ObjectUtils.sort(this.props.entries, this.props.sortKey)).map(id => [
+				return !Object.keys(this.props.entries).length ? BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TextElement, {
+					children: "You haven't added any Custom Status Presets. You can add some via the Custom Status Modal, where you usually configure your Custom Status."
+				}) : Object.keys(BDFDB.ObjectUtils.sort(this.props.entries, this.props.sortKey)).map(id => [
 					this.props.hovered == id && BDFDB.ReactUtils.createElement("div", {
 						className: BDFDB.disCN._customstatuspresetssortdivider
 					}),
@@ -190,7 +200,7 @@ module.exports = (_ => {
 							children: [
 								BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Flex.Child, {
 									wrap: true,
-									children: BDFDB.ReactUtils.createElement(CustomStatusInput, {
+									children: BDFDB.ReactUtils.createElement(CustomStatusInputComponent, {
 										text: presets[id].text,
 										emoji: presets[id].emojiInfo,
 										onChange: value => {
@@ -251,6 +261,9 @@ module.exports = (_ => {
 						overflow: visible;
 						white-space: unset;
 					}
+					#status-picker${BDFDB.dotCN.menu} #status-picker-custom-status ${BDFDB.dotCN.customstatusitem} {
+						grid-template-rows: minmax(24px, auto) 1fr;
+					}
 					#status-picker${BDFDB.dotCN.menu} #status-picker-custom-status ${BDFDB.dotCN.customstatusitemcustom},
 					#status-picker${BDFDB.dotCN.menu} #status-picker-custom-status ${BDFDB.dotCN.customstatusitemcustomwithemoji} {
 						display: flex;
@@ -280,6 +293,10 @@ module.exports = (_ => {
 						display: flex;
 						margin-right: 6px;
 					}
+					${BDFDB.dotCN._customstatuspresetsstatus} {
+						margin-right: 6px;
+						flex: 0 0 auto;
+					}
 					${BDFDB.dotCN._customstatuspresetssortdivider} {
 						background: ${BDFDB.DiscordConstants.Colors.STATUS_GREEN};
 						height: 2px;
@@ -308,7 +325,7 @@ module.exports = (_ => {
 				settingsItems.push(BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.SettingsPanelList, {
 					title: "Custom Status Presets:",
 					dividerTop: true,
-					children: BDFDB.ReactUtils.createElement(SortableList, {
+					children: BDFDB.ReactUtils.createElement(SortableListComponent, {
 						entries: presets,
 						sortKey: "pos"
 					})
@@ -358,7 +375,13 @@ module.exports = (_ => {
 												})
 											})
 										}),
-										presets[id].text
+										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.Status, {
+											className: BDFDB.disCN._customstatuspresetsstatus,
+											status: presets[id].status || BDFDB.DiscordConstants.StatusTypes.ONLINE
+										}),
+										BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TextScroller, {
+											children: presets[id].text
+										})
 									]
 								}),
 								imageUrl: presets[id].emojiInfo && (presets[id].emojiInfo.id ? BDFDB.LibraryModules.IconUtils.getEmojiURL(presets[id].emojiInfo) : BDFDB.LibraryModules.EmojiStateUtils.getURL(presets[id].emojiInfo.name)),
@@ -371,6 +394,7 @@ module.exports = (_ => {
 										expiresAt = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1).getTime() - date.getTime();
 									}
 									BDFDB.LibraryModules.SettingsUtils.updateRemoteSettings({
+										status: presets[id].status,
 										customStatus: {
 											text: presets[id].text && presets[id].text.length > 0 ? presets[id].text : null,
 											expiresAt: expiresAt ? BDFDB.DiscordObjects.Timestamp().add(expiresAt, "ms").toISOString() : null,
@@ -392,7 +416,7 @@ module.exports = (_ => {
 					color: BDFDB.disCN.modalcancelbutton,
 					look: BDFDB.LibraryComponents.Button.Looks.LINK,
 					onClick: event => {
-						presets[id] = Object.assign({pos: Object.keys(presets).length}, BDFDB.ObjectUtils.extract(e.instance.state, "clearAfter", "emojiInfo", "text"));
+						presets[id] = Object.assign({pos: Object.keys(presets).length}, BDFDB.ObjectUtils.extract(e.instance.state, "clearAfter", "emojiInfo", "status", "text"));
 						BDFDB.DataUtils.save(presets, this, "presets");
 						if (!event.shiftKey) e.instance.props.onClose();
 						else id = BDFDB.NumberUtils.generateId(Object.keys(presets));
