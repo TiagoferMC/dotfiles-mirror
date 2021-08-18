@@ -38,12 +38,12 @@ mod1 + shift + Sys_Req; t
     st -e /home/tiagofer/Projects/turtleScreencap/turtleWatch.sh
 
 mod1 + shift + m
-    st -e sh -c 'cd ~ ; flashfetch ; $SHELL'
+    st -e zsh -c 'flashfetch ; $SHELL'
 
 mod1 + p
     dmenu_run
 
-mod1 + shift + p; {t, v, l, m, d, e, s, b}
+mod1 + shift + p; {t, v, l, m, d, e, s, b, c}
     {st -e htop, \
      st -e nvim, \
      st -e links ddg.gg, \
@@ -51,7 +51,8 @@ mod1 + shift + p; {t, v, l, m, d, e, s, b}
      discord,  \
      element-desktop, \
      steam, \
-     firefox}
+     firefox, \
+     chromium}
 
 mod1 + shift + p; f; {f, v, d}
     {dmenufm, \
