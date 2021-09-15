@@ -43,7 +43,7 @@ mod1 + shift + m
 mod1 + p
     dmenu_run
 
-mod1 + shift + p; {t, v, l, m, d, e, s, b, c}
+mod1 + shift + p; {t, v, l, m, d, e, s, b, c, p}
     {st -e htop, \
      st -e nvim, \
      st -e links ddg.gg, \
@@ -52,9 +52,21 @@ mod1 + shift + p; {t, v, l, m, d, e, s, b, c}
      element-desktop, \
      steam, \
      firefox, \
-     chromium}
+     chromium, \
+     picom -b ; killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
+}
+
+mod1 + shift + p; k; {d, p, s}
+    {killall Discord, \
+     killall picom, \
+     killall sxhkd && setsid -f sxhkd
+}
 
 mod1 + shift + p; f; {f, v, d}
     {dmenufm, \
      st -e vifm, \
-     dolphin}
+     dolphin
+}
+
+mod4 + @space
+    /home/tiagofer/Scripts/Keyboard/KBLayout.sh
