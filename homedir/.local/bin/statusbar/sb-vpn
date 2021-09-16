@@ -5,7 +5,7 @@
 
 case $BLOCK_BUTTON in
      1) mullvad-vpn ;;
-     3) notify-send "🔒: vpn is active, 🔒: vpn is off, Click to open VPN Settings." ;;
+     3) notify-send "🔐: vpn is active, 🔓: vpn is off, Click to open VPN Settings." ;;
      6) "$TERMINAL" -e "$EDITOR" "$0" ;;
  esac
 
@@ -50,9 +50,9 @@ case $BLOCK_BUTTON in
          esac
 
          # vpn="🔒 $flag"
-         vpn="🔒"
+         vpn="🔐"
      else
-         vpn="🔒"
+         vpn="🔐"
      fi
  else
      vpn="🔓"
