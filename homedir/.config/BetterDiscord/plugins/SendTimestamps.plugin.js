@@ -2,7 +2,7 @@
  * @name SendTimestamps
  * @author Taimoor
  * @authorId 220161488516546561
- * @version 1.0.1
+ * @version 1.0.2
  * @description Use Discord's latest feature of using timestamps in your messages easily.
  * @authorLink https://github.com/Taimoor-Tariq
  * @source https://raw.githubusercontent.com/Taimoor-Tariq/BetterDiscordStuff/main/Plugins/SendTimestamps/SendTimestamps.plugin.js
@@ -33,7 +33,39 @@
 @else@*/
 
 module.exports = (() => {
-    const config = {"info":{"name":"Send Timestamps","authors":[{"name":"Taimoor","discord_id":"220161488516546561","github_username":"Taimoor-Tariq"}],"version":"1.0.1","description":"Use Discord's latest feature of using timestamps in your messages easily.","github":"https://github.com/Taimoor-Tariq/BetterDiscordStuff/blob/main/Plugins/SendTimestamps/SendTimestamps.plugin.js","github_raw":"https://raw.githubusercontent.com/Taimoor-Tariq/BetterDiscordStuff/main/Plugins/SendTimestamps/SendTimestamps.plugin.js"},"changelog":[{"title":"New Stuff","items":["**Display Format**: You can now choose the format of the timestamp (thanks to @l0c4lh057)","**Settings**: You can now choose the location of the button"]},{"title":"Improvements","type":"improved","items":["**Button**: Uses the same class as the chat buttons (can be customised by themes)"]},{"title":"On-going","type":"progress","items":["**Support**: Will make a proper support server once im free from school","**Keybind Support**: Planning on adding a keybind feature soon"]}],"main":"index.js"};
+    const config = {
+        info: {
+            name: "Send Timestamps",
+            authors: [
+                {
+                    name: "Taimoor",
+                    discord_id: "220161488516546561",
+                    github_username: "Taimoor-Tariq",
+                },
+            ],
+            version: "1.0.2",
+            description:
+                "Use Discord's latest feature of using timestamps in your messages easily.",
+            github: "https://github.com/Taimoor-Tariq/BetterDiscordStuff/blob/main/Plugins/SendTimestamps/SendTimestamps.plugin.js",
+            github_raw:
+                "https://raw.githubusercontent.com/Taimoor-Tariq/BetterDiscordStuff/main/Plugins/SendTimestamps/SendTimestamps.plugin.js",
+        },
+        changelog: [
+            {
+                title: "Improvements",
+                type: "improved",
+                items: ["**Button**: Fixed sizing issues"],
+            },
+            {
+                title: "On-going",
+                type: "progress",
+                items: [
+                    "**Console Errors**: Working on fixing the console errors",
+                ],
+            },
+        ],
+        main: "index.js",
+    };
 
     return !global.ZeresPluginLibrary ? class {
         constructor() {this._config = config;}
@@ -64,7 +96,7 @@ module.exports = (() => {
 .timestamp-button { color: var(--interactive-normal); }
 .timestamp-button:hover { color: var(--interactive-hover); }
 .timestamp-button button { min-height: 32px; min-width: 32px; margin-left: 0px; }
-.timestamp-button svg { width: 28px; height: 28px; }
+.timestamp-button svg { width: 24px; height: 24px; }
 
 .attachWrapper-2TRKBi .timestamp-button { margin-right: 10px; }
 .attachWrapper-2TRKBi .timestamp-button button { min-height: 24px; min-width: 24px; }

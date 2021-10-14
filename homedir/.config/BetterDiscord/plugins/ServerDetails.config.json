@@ -15,6 +15,9 @@
 	"formats": {
 		"ownFormat": "$hour: $minute: $second, $day.$month.$year"
 	},
+	"general": {
+		"onlyShowOnShift": false
+	},
 	"items": {
 		"icon": true,
 		"owner": true,

@@ -3,7 +3,9 @@
     "emoteVersion": "v1.2.1",
     "addonlistControls": {
         "plugin": {
-            "view": "grid"
+            "view": "grid",
+            "sort": "added",
+            "ascending": false
         }
     }
 }

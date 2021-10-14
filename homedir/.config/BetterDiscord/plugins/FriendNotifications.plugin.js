@@ -2,7 +2,7 @@
  * @name FriendNotifications
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.7.7
+ * @version 1.8.1
  * @description Shows a Notification when a Friend or a User, you choose to observe, changes their Status
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,18 +17,17 @@ module.exports = (_ => {
 		"info": {
 			"name": "FriendNotifications",
 			"author": "DevilBro",
-			"version": "1.7.7",
+			"version": "1.8.1",
 			"description": "Shows a Notification when a Friend or a User, you choose to observe, changes their Status"
 		},
 		"changeLog": {
-			"added": {
-				"Time Log Option": "You can now disable the time log for users, in case you only want the time log for your important friends",
-				"Log In Option": "You can now enable the login option, this will notify you in case a user changed his status from offline to any other status (so enabling only offline and login will only notify you about logout and logins, no notifications about status changes from example online to dnd)"
+			"fixed": {
+				"Status Crash": "No longer crashes Discord when clicking on the status notification adn trying to open the DM of a User you don't share a DM with"
 			}
 		}
 	};
 
-	return (window.Lightcord && !Node.prototype.isPrototypeOf(window.Lightcord) || window.LightCord && !Node.prototype.isPrototypeOf(window.LightCord)) ? class {
+	return (window.Lightcord && !Node.prototype.isPrototypeOf(window.Lightcord) || window.LightCord && !Node.prototype.isPrototypeOf(window.LightCord) || window.Astra && !Node.prototype.isPrototypeOf(window.Astra)) ? class {
 		getName () {return config.info.name;}
 		getAuthor () {return config.info.author;}
 		getVersion () {return config.info.version;}
@@ -246,7 +245,7 @@ module.exports = (_ => {
 			
 				this.patchedModules = {
 					after: {
-						Guilds: "render"
+						Guilds: "type"
 					}
 				};
 		
@@ -297,6 +296,8 @@ module.exports = (_ => {
 			
 			forceUpdateAll () {
 				defaultSettings = Object.assign(BDFDB.ObjectUtils.map(statuses, status => notificationTypes[status.value ? "TOAST" : "DISABLED"].value), {timelog: true}, BDFDB.DataUtils.load(this, "defaultSettings"));
+				
+				BDFDB.GuildUtils.rerenderAll();
 				BDFDB.PatchUtils.forceAllUpdates(this);
 			}
 
@@ -735,34 +736,8 @@ module.exports = (_ => {
 			}
 			
 			processGuilds (e) {
-				if (this.settings.general.addOnlineCount) {
-					if (typeof e.returnvalue.props.children == "function") {
-						let childrenRender = e.returnvalue.props.children;
-						e.returnvalue.props.children = BDFDB.TimeUtils.suppress((...args) => {
-							let children = childrenRender(...args);
-							this.checkTree(children);
-							return children;
-						}, "", this);
-					}
-					else this.checkTree(e.returnvalue);
-				}
-			}
-			
-			checkTree (returnvalue) {
-				let tree = BDFDB.ReactUtils.findChild(returnvalue, {filter: n => n && n.props && typeof n.props.children == "function"});
-				if (tree) {
-					let childrenRender = tree.props.children;
-					tree.props.children = BDFDB.TimeUtils.suppress((...args) => {
-						let children = childrenRender(...args);
-						this.injectCounter(children);
-						return children;
-					}, "", this);
-				}
-				else this.injectCounter(returnvalue);
-			}
-			
-			injectCounter (returnvalue) {
-				let [children, index] = BDFDB.ReactUtils.findParent(returnvalue, {name: "ConnectedUnreadDMs"});
+				if (!this.settings.general.addOnlineCount) return;
+				let [children, index] = BDFDB.ReactUtils.findParent(e.returnvalue, {name: "UnreadDMs"});
 				if (index > -1) children.splice(index, 0, BDFDB.ReactUtils.createElement(FriendOnlineCounterComponent, {
 					amount: this.getOnlineCount()
 				}));
@@ -849,7 +824,7 @@ module.exports = (_ => {
 						let user = BDFDB.LibraryModules.UserStore.getUser(id);
 						let status = this.getStatusWithMobileAndActivity(id, observedUsers[id], clientStatuses);
 						let customChanged = false, loginNotice = false;
-						if (user && (!observedUsers[id][status.name] && observedUsers[id].login && status.name != "offline" && userStatusStore[id].name == "offline" && (loginNotice = true) || observedUsers[id][status.name] && (
+						if (user && (!observedUsers[id][status.name] && observedUsers[id].login && status.name != BDFDB.DiscordConstants.StatusTypes.OFFLINE && userStatusStore[id].name == BDFDB.DiscordConstants.StatusTypes.OFFLINE && (loginNotice = true) || observedUsers[id][status.name] && (
 							observedUsers[id].custom && (
 								userStatusStore[id].custom != status.custom && ((customChanged = status.custom) || true) ||
 								(customChanged = status.custom && !this.activityIsSame(id, status))
@@ -887,11 +862,11 @@ module.exports = (_ => {
 									if (this.settings.general.openOnClick) {
 										let DMid = BDFDB.LibraryModules.ChannelStore.getDMFromUserId(user.id)
 										if (DMid) BDFDB.LibraryModules.ChannelUtils.selectPrivateChannel(DMid);
-										else BDFDB.LibraryModules.DirectMessageUtils.openPrivateChannel(BDFDB.UserUtils.me.id, user.id);
+										else BDFDB.LibraryModules.DirectMessageUtils.openPrivateChannel(user.id);
 										BDFDB.LibraryModules.WindowUtils.focus();
 									}
 								};
-								if (observedUsers[id][status.name] == notificationTypes.DESKTOP.value) {
+								if ((loginNotice ? observedUsers[id].login : observedUsers[id][status.name]) == notificationTypes.DESKTOP.value) {
 									let desktopString = string.replace(/\$user/g, `${name}${this.settings.general.showDiscriminator ? ("#" + user.discriminator) : ""}`).replace(/\$statusOld/g, oldStatusName).replace(/\$status/g, statusName);
 									if (status.activity) desktopString = desktopString.replace(/\$song|\$game/g, status.activity.name || status.activity.details || "").replace(/\$artist|\$custom/g, [status.activity.emoji && status.activity.emoji.name, status.activity.state].filter(n => n).join(" ") || "");
 									if (status.mobile) desktopString += " (mobile)";

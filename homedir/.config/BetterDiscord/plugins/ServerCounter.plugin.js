@@ -2,7 +2,7 @@
  * @name ServerCounter
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.0.3
+ * @version 1.0.4
  * @description Adds a Server Counter to the Server List
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,17 +17,20 @@ module.exports = (_ => {
 		"info": {
 			"name": "ServerCounter",
 			"author": "DevilBro",
-			"version": "1.0.3",
+			"version": "1.0.4",
 			"description": "Adds a Server Counter to the Server List"
-		},
-		"changeLog": {
-			"fixed": {
-				"Works again": "Can discord stop messing with the server list, jeez"
-			}
 		}
 	};
 
-	return !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
+	return (window.Lightcord && !Node.prototype.isPrototypeOf(window.Lightcord) || window.LightCord && !Node.prototype.isPrototypeOf(window.LightCord) || window.Astra && !Node.prototype.isPrototypeOf(window.Astra)) ? class {
+		getName () {return config.info.name;}
+		getAuthor () {return config.info.author;}
+		getVersion () {return config.info.version;}
+		getDescription () {return "Do not use LightCord!";}
+		load () {BdApi.alert("Attention!", "By using LightCord you are risking your Discord Account, due to using a 3rd Party Client. Switch to an official Discord Client (https://discord.com/) with the proper BD Injection (https://betterdiscord.app/)");}
+		start() {}
+		stop() {}
+	} : !window.BDFDB_Global || (!window.BDFDB_Global.loaded && !window.BDFDB_Global.started) ? class {
 		getName () {return config.info.name;}
 		getAuthor () {return config.info.author;}
 		getVersion () {return config.info.version;}
@@ -69,7 +72,7 @@ module.exports = (_ => {
 			onLoad () {
 				this.patchedModules = {
 					after: {
-						Guilds: "render"
+						Guilds: "type"
 					}
 				};
 			}
@@ -83,34 +86,9 @@ module.exports = (_ => {
 			}
 		
 			processGuilds (e) {
-				if (typeof e.returnvalue.props.children == "function") {
-					let childrenRender = e.returnvalue.props.children;
-					e.returnvalue.props.children = (...args) => {
-						let children = childrenRender(...args);
-						this.checkTree(children);
-						return children;
-					};
-				}
-				else this.checkTree(e.returnvalue);
-			}
-			
-			checkTree (returnvalue) {
-				let tree = BDFDB.ReactUtils.findChild(returnvalue, {filter: n => n && n.props && typeof n.props.children == "function"});
-				if (tree) {
-					let childrenRender = tree.props.children;
-					tree.props.children = (...args) => {
-						let children = childrenRender(...args);
-						this.injectCounter(children);
-						return children;
-					};
-				}
-				else this.injectCounter(returnvalue);
-			}
-			
-			injectCounter (returnvalue) {
-				let [children, index] = BDFDB.ReactUtils.findParent(returnvalue, {name: "ConnectedUnreadDMs"});
+				let [children, index] = BDFDB.ReactUtils.findParent(e.returnvalue, {name: "UnreadDMs"});
 				if (index > -1) children.splice(index + 1, 0, BDFDB.ReactUtils.createElement("div", {
-					className: BDFDB.disCN.guildouter,
+					className: BDFDB.disCNS.guildouter + BDFDB.disCN._servercounterservercountwrap,
 					children: BDFDB.ReactUtils.createElement("div", {
 						className: BDFDB.disCNS.guildslabel + BDFDB.disCN._servercounterservercount,
 						children: `${BDFDB.LanguageUtils.LanguageStrings.SERVERS} – ${BDFDB.LibraryModules.FolderStore.getFlattenedGuildIds().length}`

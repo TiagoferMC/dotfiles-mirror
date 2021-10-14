@@ -1,0 +1,62 @@
+/* Fonts */
+
+:root { /* Sets most fonts */
+    /* Tengwar Fonts: "Tengwar Annatar CSUR", "Tengwar Telcontar", "Tengwar Formal CSUR", "FreeMonotengwar" */
+    --font-display: Ginto, "Helvetica Neue", Helvetica, Arial, sans-serif, "Tengwar Annatar CSUR";
+    --font-primary: Whitney, "Helvetica Neue", Helvetica, Arial,sans-serif, "Tengwar Annatar CSUR";
+    --font-code: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", "Lucida Sans Typewriter", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono", "Nimbus Mono L", Monaco, "Courier New", Courier, monospace, "Tengwar Annatar CSUR";
+}
+
+code { /* Block Code */
+    font-family: var(--font-code);
+}
+
+.codeLine-14BKbG { /* Block Code Input */
+    font-family: var(--font-code);
+}
+
+.markup-2BOw-j code.inline { /* Inline Code */
+    font-family: var(--font-code);
+}
+
+.inlineCode-2ngu6Y { /* Inline Code Input */
+    font-family: var(--font-code);
+}
+
+.name-uJV0GL { /* Increases name size to make room for large Tengwar */
+    line-height: 150%;
+}
+
+/* Better Codeblocks Plugin */
+.bd-codeblock-language { /* Block Code */
+    font-family: Raleway, sans-serif, "Tengwar Annatar CSUR";
+}
+
+.codeBlockText-9TnoxQ { /* Block Code Input */
+    font-family: Raleway, sans-serif, "Tengwar Annatar CSUR";
+}
+
+/* BetterDiscord Custom CSS Editor (Broken) */
+.view-line {
+    font-family: Consolas, "Courier New", monospace, "Tengwar Annatar CSUR";
+}
+
+/* *** */
+
+/* Theme Fixes (Dusk to Dawn) */
+
+.container-enaOkj { /* Fix Inbox Background */
+    background-color: var(--dusk-background-2);
+}
+
+.emojiPicker-3PwZFl { /* Fix Reaction Window Background */
+    background-color: var(--dusk-background-2);
+}
+
+.bd-select .bd-select-options { /* Fix BetterDiscord Selections Backgorunds */
+    background: var(--dusk-background-2);
+}
+
+.content-1o0f9g { /* Fix Line Through Dates */
+    background: #1a1a1a;
+}

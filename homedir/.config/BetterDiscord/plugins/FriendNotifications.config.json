@@ -618,18 +618,6 @@
 					"playing": 0,
 					"streaming": 0
 				},
-				"145584524699369472": {
-					"custom": 0,
-					"disabled": true,
-					"dnd": 0,
-					"idle": 0,
-					"listening": 0,
-					"mobile": 0,
-					"offline": 0,
-					"online": 0,
-					"playing": 0,
-					"streaming": 0
-				},
 				"199532445366878208": {
 					"custom": 0,
 					"disabled": true,
@@ -1039,9 +1027,7 @@
 					"custom": 1
 				},
 				"214140898202746881": {},
-				"386652490407608326": {}
-			},
-			"strangers": {
+				"386652490407608326": {},
 				"264038812219473921": {
 					"custom": 1,
 					"disabled": true,
@@ -1054,6 +1040,10 @@
 					"playing": 0,
 					"streaming": 0
 				},
+				"180786499619389440": {},
+				"198341886576951296": {}
+			},
+			"strangers": {
 				"299338790265159698": {
 					"custom": 1,
 					"disabled": true,
@@ -1101,8 +1091,25 @@
 					"online": 1,
 					"playing": 0,
 					"streaming": 0
+				},
+				"531621164028526592": {},
+				"145584524699369472": {
+					"custom": 0,
+					"disabled": true,
+					"dnd": 0,
+					"idle": 0,
+					"listening": 0,
+					"mobile": 0,
+					"offline": 0,
+					"online": 0,
+					"playing": 0,
+					"streaming": 0
 				}
 			}
+		},
+		"null": {
+			"friends": {},
+			"strangers": {}
 		}
 	}
 }
