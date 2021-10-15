@@ -75,7 +75,7 @@
     "GuildProfile": true,
     "RightClickJoin": true,
     "QuickLastMessage": true,
-    "BetterFolders": false,
+    "BetterFolders": true,
     "BetterNsfwTag": true,
     "BetterSearchPage": true,
     "BetterVolume": true,
@@ -89,5 +89,7 @@
     "AssignBadges": true,
     "Apate": true,
     "AppNotifications": true,
-    "undefined": false
+    "undefined": false,
+    "BetterPictureInPicture": false,
+    "serverthemes": false
 }
