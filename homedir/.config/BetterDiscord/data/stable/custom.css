@@ -41,30 +41,3 @@ code { /* Block Code */
     font-family: Consolas, "Courier New", monospace, "Tengwar Annatar CSUR";
 }
 
-/* *** */
-
-/* Theme Fixes (Dusk to Dawn) */
-
-.container-enaOkj { /* Fix Inbox Background */
-    background-color: var(--dusk-background-2);
-}
-
-.emojiPicker-3PwZFl { /* Fix Reaction Window Background */
-    background-color: var(--dusk-background-2);
-}
-
-.bd-select .bd-select-options { /* Fix BetterDiscord Selections Backgorunds */
-    background: var(--dusk-background-2);
-}
-
-.content-1o0f9g { /* Fix Line Through Dates */
-    background: #1a1a1a;
-}
-
-.expandedFolderBackground-1cujaW { /* Fix Expanded Folder Background */
-    left: 9px;
-    bottom: 4px;
-    width: 54px;
-    border-radius: 24px;
-    background-color: #1f1f1f;
-}
