@@ -106,9 +106,9 @@ alias cl="clear"
 alias v="nvim"
 alias wifi=". /home/tiagofer/Scripts/WiFi/wifi.sh"
 alias mullvpn=". /home/tiagofer/Scripts/VPN/mullvad.sh"
-alias mongod-auth="sudo mongod --auth"
+alias mongod-auth="doas mongod --auth"
 alias mongo-connect="mongo --authenticationDatabase 'admin' -u 'tiagofer' -p"
-alias zeronetconfig="sudo -u zeronet python /opt/zeronet/zeronet.py --config_file /etc/zeronet.conf"
+alias zeronetconfig="doas -u zeronet python /opt/zeronet/zeronet.py --config_file /etc/zeronet.conf"
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
@@ -136,13 +136,13 @@ alias \
 	g="git" \
 	trem="transmission-remote" \
 	YT="youtube-viewer" \
-	sdn="sudo shutdown -h now" \
+	sdn="doas shutdown -h now" \
 	f="$FILE" \
 	e="$EDITOR" \
 	v="$EDITOR" \
-	p="sudo pacman" \
-	xi="sudo xbps-install" \
-	xr="sudo xbps-remove -R" \
+	p="doas pacman" \
+	xi="doas xbps-install" \
+	xr="doas xbps-remove -R" \
 	xq="xbps-query" \
 	za="zathura"
 
@@ -153,8 +153,7 @@ alias \
 	tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" \
 
 
-# Make paru use doas instead of sudo
-alias paru="paru --sudo doas"
+alias gparted="gksu gparted"
 
 # Environment Variables
 
