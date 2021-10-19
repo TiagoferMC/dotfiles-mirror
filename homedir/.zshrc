@@ -152,18 +152,25 @@ alias \
 	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" \
 	tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" \
 
-
 alias gparted="gksu gparted"
 
 # Environment Variables
-
-export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.local/bin/statusbar/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin:/usr/lib/xscreensaver
 
 # Git Stuff (Used Here Especially Because Remote SSH)
 export GPG_TTY=$(tty)
 
 # For fim
 export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
+
+# devkitpro stuff
+export DEVKITPRO=/opt/devkitpro
+export DEVKITARM=/opt/devkitpro/devkitARM
+export DEVKITPPC=/opt/devkitpro/devkitPPC
+
+source /etc/profile.d/devkit-env.sh
+
+# PATH
+export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.local/bin/statusbar/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin:/usr/lib/xscreensaver:$DEVKITARM:$DEVKITPPC:$DEVKITPRO
 
 # PyEnv
 eval "$(pyenv init -)"
