@@ -2,7 +2,7 @@
  * @name ShowConnections
  * @author DevilBro
  * @authorId 278543574059057154
- * @version 1.0.6
+ * @version 1.0.8
  * @description Shows the connected Accounts of a User in the UserPopout
  * @invite Jx3TjNS
  * @donate https://www.paypal.me/MircoWittrien
@@ -17,17 +17,12 @@ module.exports = (_ => {
 		"info": {
 			"name": "ShowConnections",
 			"author": "DevilBro",
-			"version": "1.0.6",
+			"version": "1.0.8",
 			"description": "Shows the connected Accounts of a User in the UserPopout"
-		},
-		"changeLog": {
-			"improved": {
-				"Performance": ""
-			}
 		}
 	};
 
-	return (window.Lightcord || window.LightCord) ? class {
+	return (window.Lightcord && !Node.prototype.isPrototypeOf(window.Lightcord) || window.LightCord && !Node.prototype.isPrototypeOf(window.LightCord) || window.Astra && !Node.prototype.isPrototypeOf(window.Astra)) ? class {
 		getName () {return config.info.name;}
 		getAuthor () {return config.info.author;}
 		getVersion () {return config.info.version;}
@@ -169,8 +164,8 @@ module.exports = (_ => {
 								label: this.defaults.connections[key].name,
 								value: this.settings.connections[key],
 								labelChildren: [
-									BDFDB.ReactUtils.createElement("img", {style: {width: 28, height: 28}, src: this.defaults.connections[key].icon.color}),
-									BDFDB.ReactUtils.createElement("img", {style: {width: 28, height: 28}, src: this.defaults.connections[key].icon.white})
+									BDFDB.ReactUtils.createElement("img", {style: {width: 28, height: 28}, src: this.defaults.connections[key].icon.lightSVG}),
+									BDFDB.ReactUtils.createElement("img", {style: {width: 28, height: 28}, src: this.defaults.connections[key].icon.whiteSVG})
 								]
 							}))
 						}));
@@ -222,7 +217,7 @@ module.exports = (_ => {
 													BDFDB.ReactUtils.createElement("img", {
 														className: BDFDB.disCN._showconnectionsicon,
 														alt: BDFDB.LanguageUtils.LanguageStringsFormat("IMG_ALT_LOGO", provider.name),
-														src: provider.icon[_this.settings.general.useColoredIcons ? "color" : "white"]
+														src: provider.icon[_this.settings.general.useColoredIcons ? "lightSVG" : "whiteSVG"]
 													}),
 													_this.settings.general.showVerifiedBadge && c.verified && BDFDB.ReactUtils.createElement(BDFDB.LibraryComponents.TooltipContainer, {
 														text: BDFDB.LanguageUtils.LanguageStrings.CONNECTION_VERIFIED,
@@ -247,7 +242,7 @@ module.exports = (_ => {
 							];
 						}
 					}
-				}));
+				}, true));
 			}
 		};
 	})(window.BDFDB_Global.PluginUtils.buildPlugin(config));

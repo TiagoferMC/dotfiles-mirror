@@ -12,11 +12,12 @@
 		"GameActivityToggle": "1.0.4",
 		"GoogleSearchReplace": "1.3.2",
 		"GoogleTranslateOption": "2.1.7",
-		"ImageUtilities": "4.5.1",
+		"ImageUtilities": "4.5.2",
+		"NotificationSounds": "3.6.3",
 		"SendLargeMessages": "1.6.6",
 		"ServerCounter": "1.0.3",
 		"ServerDetails": "1.0.7",
-		"ShowConnections": "1.0.6",
+		"ShowConnections": "1.0.7",
 		"ShowHiddenChannels": "3.0.2",
 		"SplitLargeMessages": "1.7.0",
 		"TopRoleEverywhere": "3.0.7",
@@ -31,7 +32,7 @@
 		"useChromium": false
 	},
 	"hashes": {
-		"0BDFDB.data.json": "a6cdce1d5f9ca06100bb8f28822af6869f7cf046",
+		"0BDFDB.data.json": "1080927200fed4fa9968b472281fa7306ab29645",
 		"0BDFDB.raw.css": "6bb82eb9f45d2d68a03ad2d3e21dcf35a5e2e3ee"
 	}
 }

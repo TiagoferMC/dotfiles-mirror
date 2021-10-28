@@ -1,9 +1,8 @@
 /**
  * @name UserVoiceShow
- * @version 0.0.2
- * @authorLink https://github.com/eternal-hatred
- * @website https://eternal-hatred.github.io/eternal
- * @source https://github.com/eternal-hatred/BetterDiscordStuff/tree/main/UserVoiceShow
+ * @version 0.0.3
+ * @authorLink https://github.com/xmnlz
+ * @source https://github.com/xmlnz/better-discord-stuff/edit
  */
 /*@cc_on
 @if (@_jscript)
@@ -37,11 +36,11 @@ const config = {
         name: "UserVoiceShow",
         authors: [
             {
-                name: "eternalz",
+                name: "eternalzq",
                 discord_id: "339763421404725248",
             }
         ],
-        version: "0.0.2",
+        version: "0.0.3",
         description: "The UserVoiceShow plugin allows you to find out the voice channel where the user is sitting.",
     }
 };
@@ -52,7 +51,7 @@ module.exports = global.ZeresPluginLibrary ? (([Plugin, Library]) => {
     const modules = {
         UserProfileModalHeader: WebpackModules.find(m => m?.default?.displayName === "UserProfileModalHeader"),
         UserPopoutBody : WebpackModules.find(m => m?.default?.displayName === "UserPopoutBody"),
-        VoiceStates : WebpackModules.getByProps('getVoiceStates'),
+        VoiceStates : WebpackModules.getByProps('getVoiceStateForUser'),
     }
     let channelName;
 

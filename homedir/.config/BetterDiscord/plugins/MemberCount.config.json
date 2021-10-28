@@ -2,5 +2,8 @@
     "currentVersionInfo": {
         "version": "2.2.7",
         "hasShownChangelog": true
+    },
+    "settings": {
+        "blacklist": []
     }
 }
