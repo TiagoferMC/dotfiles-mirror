@@ -109,6 +109,7 @@ alias mullvpn=". /home/tiagofer/Scripts/VPN/mullvad.sh"
 alias mongod-auth="doas mongod --auth"
 alias mongo-connect="mongo --authenticationDatabase 'admin' -u 'tiagofer' -p"
 alias zeronetconfig="doas -u zeronet python /opt/zeronet/zeronet.py --config_file /etc/zeronet.conf"
+alias discord="PULSE_LATENCY_MSEC=83 discord" # Fix Discord Audio Rate to 1024/48000
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
@@ -170,7 +171,7 @@ export DEVKITPPC=/opt/devkitpro/devkitPPC
 source /etc/profile.d/devkit-env.sh
 
 # PATH
-export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.local/bin/statusbar/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin:/usr/lib/xscreensaver:$DEVKITARM:$DEVKITPPC:$DEVKITPRO
+export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.local/bin/statusbar/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin:/usr/lib/xscreensaver:$DEVKITARM/bin:$DEVKITPPC/bin:$DEVKITPRO/bin
 
 # PyEnv
 eval "$(pyenv init -)"
