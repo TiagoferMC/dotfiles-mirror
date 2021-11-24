@@ -106,7 +106,7 @@ alias cl="clear"
 alias v="nvim"
 alias wifi=". /home/tiagofer/Scripts/WiFi/wifi.sh"
 alias mullvpn=". /home/tiagofer/Scripts/VPN/mullvad.sh"
-alias mongod-auth="doas mongod --auth"
+alias mongod-auth="doas mongod --auth --quiet --config /etc/mongodb.conf --dbpath /var/lib/mongodb"
 alias mongo-connect="mongo --authenticationDatabase 'admin' -u 'tiagofer' -p"
 alias zeronetconfig="doas -u zeronet python /opt/zeronet/zeronet.py --config_file /etc/zeronet.conf"
 alias discord="PULSE_LATENCY_MSEC=83 discord" # Fix Discord Audio Rate to 1024/48000
