@@ -39,6 +39,10 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 export TERMINAL=st
 export EDITOR=nvim
 
+# Wine Esync and Fsync/Futex2
+export WINEESYNC=1
+export WINEFSYNC=1
+
 # This is the list for lf icons:
 export LF_ICONS="di=📁:\
 fi=📃:\
