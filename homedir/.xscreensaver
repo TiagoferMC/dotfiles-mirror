@@ -27,7 +27,7 @@ dpmsOff:	4:00:00
 grabDesktopImages:  False
 grabVideoFrames:    False
 chooseRandomImages: True
-imageDirectory:	/home/tiagofer/Documents/Wallpapers
+imageDirectory:	/mnt/Drive2/Documents/Wallpapers
 
 mode:		random
 selected:	-1
