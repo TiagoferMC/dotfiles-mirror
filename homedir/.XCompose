@@ -7,9 +7,9 @@ include "/home/tiagofer/Scripts/xcompose/parens.compose"
 include "/home/tiagofer/Scripts/xcompose/tags.compose"
 include "/home/tiagofer/Scripts/xcompose/maths.compose"
 
-include "~/Scripts/xcompose/winCompose/DefaultUserSequences"
-# include "~/Scripts/xcompose/winCompose/WinCompose"
-# include "~/Scripts/xcompose/winCompose/Emoji"
+include "/home/tiagofer/Scripts/xcompose/winCompose/DefaultUserSequences"
+include "/home/tiagofer/Scripts/xcompose/winCompose/Emoji"
+#include "/home/tiagofer/Scripts/xcompose/winCompose/WinCompose"
 
 # I complain a lot, oy...
  <Multi_key> <O> <Y>	: "ѹ" U0479	# CYRILLIC SMALL LETTER UK
