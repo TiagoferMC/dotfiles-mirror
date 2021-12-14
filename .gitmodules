@@ -10,6 +10,3 @@
 [submodule "homedir/Suckless/st"]
 	path = homedir/Suckless/st
 	url = git@gitlab.com:Tiagofer/st.git
-[submodule "homedir/Scripts/xcompose"]
-	path = homedir/Scripts/xcompose
-	url = https://github.com/kragen/xcompose
