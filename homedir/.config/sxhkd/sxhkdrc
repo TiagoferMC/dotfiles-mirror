@@ -48,7 +48,7 @@ mod1 + shift + p; {t, v, l, m, d, e, s, b, c, p}
      st -e nvim, \
      st -e links ddg.gg, \
      musescore, \
-     discord,  \
+     PULSE_LATENCY_MSEC=83 discord,  \
      element-desktop, \
      steam, \
      firefox, \
