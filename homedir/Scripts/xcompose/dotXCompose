@@ -1,10 +1,6 @@
 # for Emacs: -*- coding: utf-8 -*-
 include "%L"
 
-include "./winCompose/WinCompose.txt"
-include "./winCompose/Emoji.txt"
-include "./winCompose/DefaultUserSequences.txt"
-
 # def emit(keys, codepoint, word):
 #     print ('<Multi_key> %s <period>\t: "%s"\tU%04X\t\t# CIRCLED DIGIT %s' % 
 #            (keys, unichr(codepoint), codepoint, word)).encode('utf8')

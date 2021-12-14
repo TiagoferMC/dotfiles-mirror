@@ -1,0 +1,17 @@
+# for Emacs: -*- coding: utf-8 -*-
+include "/home/tiagofer/Scripts/xcompose/dotXCompose"
+include "/home/tiagofer/Scripts/xcompose/frakturcompose"
+include "/home/tiagofer/Scripts/xcompose/emoji.compose"
+include "/home/tiagofer/Scripts/xcompose/modletters.compose"
+include "/home/tiagofer/Scripts/xcompose/parens.compose"
+include "/home/tiagofer/Scripts/xcompose/tags.compose"
+include "/home/tiagofer/Scripts/xcompose/maths.compose"
+
+include "~/Scripts/xcompose/winCompose/DefaultUserSequences"
+# include "~/Scripts/xcompose/winCompose/WinCompose"
+# include "~/Scripts/xcompose/winCompose/Emoji"
+
+# I complain a lot, oy...
+ <Multi_key> <O> <Y>	: "ѹ" U0479	# CYRILLIC SMALL LETTER UK
+ # My very original smileyface!
+ <Multi_key> <parenleft> <t> <u> <parenright> : "㋡" U32E1 # CIRCLED KATAKANA TU
