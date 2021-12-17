@@ -1,0 +1,15 @@
+sudo ./install-font.sh -s -F FSF -f +R fonts/FreeFonts/FSF/FreeSerif.otf
+sudo ./install-font.sh -s -F FSF -f +B fonts/FreeFonts/FSF/FreeSerifBoold.otf
+sudo ./install-font.sh -s -F FSF -f +I fonts/FreeFonts/FSF/FreeSerifItalic.otf
+sudo ./install-font.sh -s -F FSF -f +BI fonts/FreeFonts/FSF/FreeSerifBoldItalic.otf
+
+sudo ./install-font.sh -s -F FSA -f +R fonts/FreeFonts/FSF/FreeSans.otf
+sudo ./install-font.sh -s -F FSA -f +B fonts/FreeFonts/FSF/FreeSansBold.otf
+sudo ./install-font.sh -s -F FSA -f +I fonts/FreeFonts/FSF/FreeSansOblique.otf
+sudo ./install-font.sh -s -F FSA -f +BI fonts/FreeFonts/FSF/FreeSansBoldOblique.otf
+
+sudo ./install-font.sh -s -F FM -f +R fonts/FreeFonts/FSF/FreeMono.otf
+sudo ./install-font.sh -s -F FM -f +B fonts/FreeFonts/FSF/FreeMonoBold.otf
+sudo ./install-font.sh -s -F FM -f +I fonts/FreeFonts/FSF/FreeMonoOblique.otf
+sudo ./install-font.sh -s -F FM -f +BI fonts/FreeFonts/FM/FreeMonoBoldOblique.otf
+
