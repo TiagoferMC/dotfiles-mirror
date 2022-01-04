@@ -161,6 +161,9 @@ alias gparted="gksu gparted"
 # Git Stuff (Used Here Especially Because Remote SSH)
 export GPG_TTY=$(tty)
 
+# For Java
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/default/lib/server
+
 # For fim
 export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
 
@@ -172,7 +175,14 @@ export DEVKITPPC=/opt/devkitpro/devkitPPC
 source /etc/profile.d/devkit-env.sh
 
 # PATH
-export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.local/bin/statusbar/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin:/usr/lib/xscreensaver:$DEVKITARM/bin:$DEVKITPPC/bin:$DEVKITPRO/bin
+export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.perl5/bin:/opt/vcpkg:/opt/vcpkg/installed/x64-linux/include:/home/tiagofer/.local/bin/statusbar/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin:/usr/lib/xscreensaver:$DEVKITARM/bin:$DEVKITPPC/bin:$DEVKITPRO/bin
+
+# Perl5
+export PERL5LIB="/home/tiagofer/.perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"
+export PERL_LOCAL_LIB_ROOT="/home/tiagofer/.perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"
+export PERL_MB_OPT="--install_base \"/home/tiagofer/.perl5\""
+export PERL_MM_OPT="INSTALL_BASE=/home/tiagofer/.perl5"
 
 # PyEnv
 eval "$(pyenv init -)"
+
