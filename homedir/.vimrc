@@ -880,12 +880,7 @@ let g:ale_fix_on_save = 1
 let g:gitgutter_enabled=0
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
+let g:AutoPairsShortcutToggle = '<C-p>'
 
-
-
-
-
-
-
-
+autocmd BufRead,BufNewFile *.ms set filetype=groff
 
