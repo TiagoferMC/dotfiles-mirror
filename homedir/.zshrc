@@ -172,7 +172,7 @@ export DEVKITPRO=/opt/devkitpro
 export DEVKITARM=/opt/devkitpro/devkitARM
 export DEVKITPPC=/opt/devkitpro/devkitPPC
 
-source /etc/profile.d/devkit-env.sh
+#source /etc/profile.d/devkit-env.sh
 
 # PATH
 export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.perl5/bin:/opt/vcpkg:/opt/vcpkg/installed/x64-linux/include:/home/tiagofer/.local/bin/statusbar/:/root/.gem/ruby/2.7.0/bin:/home/tiagofer/.gem/ruby/2.7.0/bin:/usr/lib/xscreensaver:$DEVKITARM/bin:$DEVKITPPC/bin:$DEVKITPRO/bin

@@ -83,6 +83,9 @@ if dein#load_state('/home/tiagofer/.vim/bundles')
     " Suppercollider
     call dein#add('supercollider/scvim')
 
+    " Vimwiki
+    call dein#add('vimwiki/vimwiki')
+
     call dein#end()
     call dein#save_state()
 endif
