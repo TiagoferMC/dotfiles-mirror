@@ -1,0 +1,15 @@
+# Static information about the filesystems.
+# See fstab(5) for details.
+
+# <file system> <dir> <type> <options> <dump> <pass>
+/dev/sda2	/         	ext4      	rw,relatime	0 1
+
+/dev/sda1	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro	0 2
+
+/dev/sdb1	/mnt/Drive2     ntfs-3g      	defaults,rw,permissions,locale=en-US.utf8,exec,uid=1000,gid=1000,umask=000	0 1
+
+/dev/sda3	none      	swap      	defaults  	0 0
+
+/dev/sdc2	none      	swap      	defaults  	0 0
+
+
