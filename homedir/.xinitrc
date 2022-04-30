@@ -1,4 +1,5 @@
 #!/bin/bash
+eval "$(dbus-launch --sh-syntax --exit-with-session)"
 
 # Composer
 picom -b
