@@ -186,3 +186,6 @@ export PERL_MM_OPT="INSTALL_BASE=/home/tiagofer/.perl5"
 # PyEnv
 eval "$(pyenv init -)"
 
+#RBenv
+eval "$(rbenv init -)"
+
