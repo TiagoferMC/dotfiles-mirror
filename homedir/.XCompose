@@ -1,14 +1,14 @@
 # for Emacs: -*- coding: utf-8 -*-
 include "/home/tiagofer/Scripts/xcompose/dotXCompose"
 include "/home/tiagofer/Scripts/xcompose/frakturcompose"
-include "/home/tiagofer/Scripts/xcompose/emoji.compose"
-include "/home/tiagofer/Scripts/xcompose/modletters.compose"
+include "/home/tiagofer/Scripts/xcompose/emoji-base"
+include "/home/tiagofer/Scripts/xcompose/modletters-base"
 include "/home/tiagofer/Scripts/xcompose/parens.compose"
-include "/home/tiagofer/Scripts/xcompose/tags.compose"
-include "/home/tiagofer/Scripts/xcompose/maths.compose"
+include "/home/tiagofer/Scripts/xcompose/tags-base"
+include "/home/tiagofer/Scripts/xcompose/maths-base"
 
-include "/home/tiagofer/Scripts/xcompose/winCompose/DefaultUserSequences"
-include "/home/tiagofer/Scripts/xcompose/winCompose/Emoji"
+include "/home/tiagofer/Scripts/winCompose/DefaultUserSequences"
+include "/home/tiagofer/Scripts/winCompose/Emoji"
 #include "/home/tiagofer/Scripts/xcompose/winCompose/WinCompose"
 
 # I complain a lot, oy...

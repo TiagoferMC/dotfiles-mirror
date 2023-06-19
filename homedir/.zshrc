@@ -185,6 +185,9 @@ export PERL_LOCAL_LIB_ROOT="/home/tiagofer/.perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_
 export PERL_MB_OPT="--install_base \"/home/tiagofer/.perl5\""
 export PERL_MM_OPT="INSTALL_BASE=/home/tiagofer/.perl5"
 
+# Compose Stuff
+export GTK_IM_MODULE="xim"
+
 # PyEnv
 eval "$(pyenv init -)"
 
