@@ -43,21 +43,21 @@ mod1 + shift + m
 mod1 + p
     dmenu_run
 
-mod1 + shift + p; {t, v, l, m, d, e, s, b, c, p}
+mod1 + shift + p; {t, v, l, m, d, e, s, b, f, p}
     {st -e htop, \
      st -e nvim, \
-     st -e links ddg.gg, \
-     musescore, \
-     PULSE_LATENCY_MSEC=83 discord,  \
+     st -e links search.brave.com, \
+     musescore3, \
+     armcord,  \
      element-desktop, \
      steam, \
+     brave, \
      firefox, \
-     chromium, \
      picom -b ; killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
 }
 
 mod1 + shift + p; k; {d, p, s}
-    {killall Discord, \
+    {killall armcord, \
      killall picom, \
      killall sxhkd && setsid -f sxhkd
 }
