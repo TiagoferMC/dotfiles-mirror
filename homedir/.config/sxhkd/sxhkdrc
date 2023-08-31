@@ -43,7 +43,7 @@ mod1 + shift + m
 mod1 + p
     dmenu_run
 
-mod1 + shift + p; {t, v, l, m, d, e, s, b, f, p}
+mod1 + shift + p; {t, v, l, m, d, e, s, b, p}
     {st -e htop, \
      st -e nvim, \
      st -e links search.brave.com, \
@@ -52,7 +52,6 @@ mod1 + shift + p; {t, v, l, m, d, e, s, b, f, p}
      element-desktop, \
      steam, \
      brave, \
-     firefox, \
      picom -b ; killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
 }
 
