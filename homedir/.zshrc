@@ -109,8 +109,8 @@ alias mullvpn=". /home/tiagofer/Scripts/VPN/mullvad.sh"
 alias mongod-auth="doas mongod --config /etc/mongodb.conf --dbpath /var/lib/mongodb"
 alias mongo-connect="mongosh --authenticationDatabase 'admin' -u 'tiagofer' -p"
 alias zeronetconfig="doas -u zeronet python /opt/zeronet/zeronet.py --config_file /etc/zeronet.conf"
-alias discord="PULSE_LATENCY_MSEC=83 discord" # Fix Discord Audio Rate to 1024/48000
 alias pacman-size='expac "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | less'
+alias resolve='primusrun /opt/resolve/bin/resolve'
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
