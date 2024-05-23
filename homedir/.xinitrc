@@ -6,6 +6,7 @@ picom -b
 
 # Keybindings
 sxhkd &
+autokey-gtk &
 
 # Wallpaper
 /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
@@ -14,9 +15,9 @@ sxhkd &
 . ./.profile
 
 # Audio
-setsid -f pipewire
+pipewire &
 
 # Window Manager
-setsid -f dunst
-setsid -f dwmblocks
+dunst &
+dwmblocks &
 exec dwm
