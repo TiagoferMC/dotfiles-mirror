@@ -183,4 +183,8 @@ export GTK_IM_MODULE="xim"
 # PyEnv
 eval "$(pyenv init -)"
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
 
+# Rehash from pacman hook
+TRAPUSR1() { rehash }
