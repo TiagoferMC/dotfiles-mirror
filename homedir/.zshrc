@@ -188,3 +188,6 @@ source <(fzf --zsh)
 
 # Rehash from pacman hook
 TRAPUSR1() { rehash }
+
+# Broot
+source /home/tiagofer/.config/broot/launcher/bash/br

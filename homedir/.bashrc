@@ -7,3 +7,6 @@
 
 # alias ls='ls --color=auto'
 # PS1='[\u@\h \W]\$ '
+
+#Broot
+source /home/tiagofer/.config/broot/launcher/bash/br
