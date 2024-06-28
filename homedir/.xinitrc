@@ -11,6 +11,9 @@ autokey-gtk &
 # Wallpaper
 /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
 
+# Caps Indicator
+caps-indicator &
+
 # Other Things
 . ./.profile
 
