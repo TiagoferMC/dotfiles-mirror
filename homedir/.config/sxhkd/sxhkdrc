@@ -20,7 +20,7 @@ XF86MonBrightnessUp
 
 
 mod1 + shift + r
-    killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
+    killall wallpaper.sh ;killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
 
 Print
     maim | xclip -sel clip -t image/png && notify-send Screenshot 'Screenshot Copied to Clipboard'
@@ -34,19 +34,16 @@ shift + Print
 mod1 + shift + Print
     LIBGL_ALWAYS_SOFTWARE=1 maim -s ~/Pictures/$(date +%FZ%T).png && notify-send Screenshot 'Screenshot Saved'
 
-mod1 + shift + Sys_Req; t 
-    st -e /home/tiagofer/Projects/turtleScreencap/turtleWatch.sh
-
 mod1 + shift + m
-    st -e zsh -c 'flashfetch ; $SHELL'
+    kitty -e zsh -c 'flashfetch ; $SHELL'
 
 mod1 + p
     dmenu_run
 
 mod1 + shift + p; {t, v, l, m, d, e, s, b, p}
-    {st -e htop, \
-     st -e nvim, \
-     st -e links search.brave.com, \
+    {kitty -e htop, \
+     kitty -e nvim, \
+     kitty -e links search.brave.com, \
      musescore3, \
      armcord,  \
      element-desktop, \
@@ -63,7 +60,7 @@ mod1 + shift + p; k; {d, p, s}
 
 mod1 + shift + p; f; {f, v, d}
     {dmenufm, \
-     st -e vifm, \
+     kitty -e vifm, \
      dolphin
 }
 
