@@ -20,7 +20,7 @@ XF86MonBrightnessUp
 
 
 mod1 + shift + r
-    killall wallpaper.sh ;killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
+    killall wallpaper.sh ; killall xwinwrap ; /home/tiagofer/Scripts/Wallpaper/wallpaper.sh
 
 Print
     maim | xclip -sel clip -t image/png && notify-send Screenshot 'Screenshot Copied to Clipboard'
