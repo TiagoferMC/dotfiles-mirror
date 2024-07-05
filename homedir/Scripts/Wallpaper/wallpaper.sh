@@ -21,7 +21,7 @@ maybe_kill() {
 if [ $(($RANDOM % $chance_of_animated)) -eq 0 ]; then
     animated_wallpaper_path="/mnt/Drive2/Documents/Wallpapers/Animated/"
     selected_file=$(ls -1 $animated_wallpaper_path | shuf -n 1)
-    xwinwrap -ov -fs -nf -ni -- /bin/mpv "$animated_wallpaper_path/$selected_file" --loop=inf -wid WID -no-osc &
+    xwinwrap -ov -fs -nf -ni -- /bin/mpv "$animated_wallpaper_path/$selected_file" --loop=inf -wid WID -no-osc --aid=no &
     sleep $wallpaper_duration
     restart_script
 else
