@@ -9,7 +9,7 @@ sxhkd &
 autokey-gtk &
 
 # Wallpaper
-/home/tiagofer/Scripts/Wallpaper/wallpaper.sh
+/home/tiagofer/Scripts/Wallpaper/wallpaper.sh &
 
 # Caps Indicator
 caps-indicator &
