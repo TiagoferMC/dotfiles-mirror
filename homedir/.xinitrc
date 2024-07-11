@@ -17,6 +17,9 @@ caps-indicator &
 # Other Things
 . ./.profile
 
+# Polkit Agent
+/usr/lib/polkit-kde-authentication-agent-1 &
+
 # Audio
 pipewire &
 
