@@ -38,6 +38,13 @@ export _JAVA_AWT_WM_NONREPARENTING=1	# Fix for Java applications in dwm
 
 export TERMINAL=kitty
 export EDITOR=nvim
+export OPENER=xdg-open
+export READER=mupdf
+export VIDEO_PLAYER=mpv
+export AUDIO_PLAYER=mpv
+export IMAGE_EDITOR=gimp
+export IMAGE_VIEWER=vimiv
+export VIDEO_EDITOR=kdenlive
 
 # Wine Esync and Fsync/Futex2
 export WINEESYNC=1
