@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/tiagofer/.oh-my-zsh"
+export ZSH="/home/deck/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -74,6 +74,7 @@ source $ZSH/oh-my-zsh.sh
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -104,13 +105,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 alias cl="clear"
 alias v="nvim"
-alias wifi=". /home/tiagofer/Scripts/WiFi/wifi.sh"
-alias mullvpn=". /home/tiagofer/Scripts/VPN/mullvad.sh"
-alias mongod-auth="doas mongod --config /etc/mongodb.conf --dbpath /var/lib/mongodb"
-alias mongo-connect="mongosh --authenticationDatabase 'admin' -u 'tiagofer' -p"
-alias zeronetconfig="doas -u zeronet python /opt/zeronet/zeronet.py --config_file /etc/zeronet.conf"
 alias pacman-size='expac "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | less'
-alias resolve='primusrun /opt/resolve/bin/resolve'
 
 # Use neovim for vim if present.
 [ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
@@ -121,8 +116,6 @@ alias \
 	mv="mv -iv" \
 	rm="rm -v" \
 	mkd="mkdir -pv" \
-	yt="youtube-dl --add-metadata -i" \
-	yta="yt -x -f bestaudio/best" \
 	ffmpeg="ffmpeg -hide_banner"
 
 # Colorize commands when possible.
@@ -132,62 +125,22 @@ alias \
 	diff="diff --color=auto" \
 	ccat="highlight --out-format=ansi"
 
-# These common commands are just too long! Abbreviate them.
-alias \
-	ka="killall" \
-	g="git" \
-	trem="transmission-remote" \
-	YT="youtube-viewer" \
-	sdn="doas shutdown -h now" \
-	f="$FILE" \
-	e="$EDITOR" \
-	v="$EDITOR" \
-	p="doas pacman" \
-	xi="doas xbps-install" \
-	xr="doas xbps-remove -R" \
-	xq="xbps-query" \
-	za="zathura"
-
-alias \
-	magit="nvim -c MagitOnly" \
-	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/zshnameddirrc" \
-	weath="less -S ${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport" \
-	tmux="tmux -f ${XDG_CONFIG_HOME:-$HOME/.config}/tmux/tmux.conf" \
-
 alias gparted="gksu gparted"
 
+autoload zmv
+alias zcp='zmv -C' zln='zmv -L'
+
 # Environment Variables
+if  [ "$(echo $XDG_SESSION_TYPE)" = "wayland" ]; then
+    export DISPLAY=:1
+fi
 
 # Git Stuff (Used Here Especially Because Remote SSH)
 export GPG_TTY=$(tty)
 
-# For Java
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/jvm/default/lib/server
+#xhost +si:localuser:$USER
 
-# For fim
-export FBFONT=/usr/share/kbd/consolefonts/ter-216n.psf.gz
 
-# devkitpro stuff
-export DEVKITPRO=/opt/devkitpro
-export DEVKITARM=/opt/devkitpro/devkitARM
-export DEVKITPPC=/opt/devkitpro/devkitPPC
+if [ -e /home/deck/.nix-profile/etc/profile.d/nix.sh ]; then . /home/deck/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
-#source /etc/profile.d/devkit-env.sh
-
-# PATH
-export PATH=$PATH:/home/tiagofer/.local/bin/:/home/tiagofer/.perl5/bin:/opt/vcpkg:/opt/vcpkg/installed/x64-linux/include:/home/tiagofer/.local/bin/statusbar/:$GEM_HOME/bin:bin:/usr/lib/xscreensaver:$DEVKITARM/bin:$DEVKITPPC/bin:$DEVKITPRO/bin
-
-# Compose Stuff
-export GTK_IM_MODULE="xim"
-
-# PyEnv
-eval "$(pyenv init -)"
-
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
-
-# Rehash from pacman hook
-TRAPUSR1() { rehash }
-
-# Broot
-source /home/tiagofer/.config/broot/launcher/bash/br
+export PATH="$HOME/.local/bin":$PATH
