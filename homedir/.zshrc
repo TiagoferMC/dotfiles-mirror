@@ -140,7 +140,4 @@ export GPG_TTY=$(tty)
 
 #xhost +si:localuser:$USER
 
-
-if [ -e /home/deck/.nix-profile/etc/profile.d/nix.sh ]; then . /home/deck/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-export PATH="$HOME/.local/bin":$PATH
+export PATH="$HOME/.local/bin":"$HOME/.cargo/bin":$PATH
