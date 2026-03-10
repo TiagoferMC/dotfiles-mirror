@@ -140,4 +140,67 @@ export GPG_TTY=$(tty)
 
 #xhost +si:localuser:$USER
 
-export PATH="$HOME/.local/bin":"$HOME/.cargo/bin":$PATH
+# --- Custom tab title ---
+
+# Always recompute on new shell — don't inherit from parent
+unset TAB_PREFIX
+if [[ -z "$TAB_PREFIX" ]]; then
+  export TAB_PREFIX=" $(grep "PRETTY_NAME" /etc/os-release | awk -F '=' '{ gsub(/'"'"'|"/, ""); gsub(/ Linux/, ""); print $2 }')"
+fi
+_TAB_PREFIX="$TAB_PREFIX"
+
+# Helper to set the terminal tab/window title
+_set_title() {
+  print -Pn "\e]0;${1}\a"
+}
+
+# Called before each prompt (idle — show cwd)
+_custom_precmd_title() {
+  _set_title "${_TAB_PREFIX} %1~ "
+}
+
+_custom_preexec_title() {
+  local cmd="$1"
+  local first_word="${cmd%% *}"
+
+  case "$first_word" in
+    vi|vim|nvim|neovim|emacs|emacs-nw|emacs-nox)
+      # Resolve what will actually run
+      local display_name
+      if [[ "$first_word" == "vim" ]] && [[ "$(whence vim)" = "nvim" ]]; then
+        display_name="nvim"
+      else
+        display_name="$first_word"
+      fi
+
+      local args=("${(z)cmd}")
+      local file_arg
+      for a in "${args[@]}"; do
+        [[ "$a" != -* ]] && file_arg="$a"
+      done
+      local fname="${file_arg:t}"
+      if [[ -n "$fname" && "$fname" != "$first_word" ]]; then
+        _set_title "${_TAB_PREFIX} ${display_name}: ${fname} "
+      else
+        _set_title "${_TAB_PREFIX} ${display_name} "
+      fi
+      ;;
+    command)
+      # `command vim` etc — strip `command` and reprocess
+      _custom_preexec_title "${cmd#command }"
+      ;;
+    *)
+      _set_title "${_TAB_PREFIX} ${first_word} [%1~] "
+      ;;
+  esac
+}
+
+# Remove OMZ's title hooks and replace with ours
+precmd_functions=(${precmd_functions:#omz_termsupport_precmd})
+preexec_functions=(${preexec_functions:#omz_termsupport_preexec})
+
+add-zsh-hook precmd  _custom_precmd_title
+add-zsh-hook preexec _custom_preexec_title
+
+export PATH="$HOME/.local/bin":"$HOME/.local/bin/distrobox":"$HOME/.cargo/bin":$PATH
+
