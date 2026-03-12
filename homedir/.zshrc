@@ -145,7 +145,7 @@ export GPG_TTY=$(tty)
 # Always recompute on new shell — don't inherit from parent
 unset TAB_PREFIX
 if [[ -z "$TAB_PREFIX" ]]; then
-  export TAB_PREFIX=" $(grep "PRETTY_NAME" /etc/os-release | awk -F '=' '{ gsub(/'"'"'|"/, ""); gsub(/ Linux/, ""); print $2 }')"
+  export TAB_PREFIX=" $(awk -F '=' ' /^PRETTY_NAME/ { gsub(/'"'"'|"/, ""); gsub(/ Linux/, ""); print $2 }' /etc/os-release)"
 fi
 _TAB_PREFIX="$TAB_PREFIX"
 
