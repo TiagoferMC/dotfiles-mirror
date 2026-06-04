@@ -72,7 +72,8 @@ plugins=(git sudo z)
 
 source $ZSH/oh-my-zsh.sh
 
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh 2>/dev/null
 
 
 # User configuration
@@ -101,44 +102,57 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Aliases
+typeset -g _PWD_SHORTENED=0
+typeset -g _REAL_PWD=""
 
-alias cl="clear"
-alias v="nvim"
-alias pacman-size='expac "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | less'
+function _pwd_display() {
+    local full="${PWD/#$HOME/~}"
 
-# Use neovim for vim if present.
-[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+    if (( _PWD_SHORTENED )); then
+        # Count components (split on /)
+        local parts=("${(@s:/:)full}")
+        # If short enough, just show full path and turn off shortened mode
+        if (( ${#parts} <= 3 )); then
+            _PWD_SHORTENED=0
+            _REAL_PWD=""
+            echo "$full"
+        else
+            # Preserve leading ~ or empty (for /)
+            local prefix="${parts[1]}"
+            local last="${parts[-1]}"
+            #echo "$last"
+            if [[ "$prefix" == "~" ]]; then
+                echo "~/…/$last"
+            else
+                echo "/…/$last"
+            fi
+        fi
+    else
+        echo "$full"
+    fi
+}
 
-# Verbosity and settings that you pretty much just always are going to want.
-alias \
-	cp="cp -iv" \
-	mv="mv -iv" \
-	rm="rm -v" \
-	mkd="mkdir -pv" \
-	ffmpeg="ffmpeg -hide_banner"
+function _toggle_pwd_chpwd() {
+    # Don't reset _PWD_SHORTENED — let _pwd_display handle it
+    _REAL_PWD="$PWD"
+}
 
-# Colorize commands when possible.
-alias \
-	ls="ls -hN --color=auto --group-directories-first" \
-	grep="grep --color=auto" \
-	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi"
+PROMPT="${PROMPT//'%~'/\$(_pwd_display)}"
 
-alias gparted="gksu gparted"
+function toggle_short_pwd() {
+    if (( _PWD_SHORTENED == 0 )); then
+        _REAL_PWD="$PWD"
+        _PWD_SHORTENED=1
+    else
+        _PWD_SHORTENED=0
+        _REAL_PWD=""
+    fi
+    zle reset-prompt
+}
 
-autoload zmv
-alias zcp='zmv -C' zln='zmv -L'
-
-# Environment Variables
-if  [ "$(echo $XDG_SESSION_TYPE)" = "wayland" ]; then
-    export DISPLAY=:1
-fi
-
-# Git Stuff (Used Here Especially Because Remote SSH)
-export GPG_TTY=$(tty)
-
-#xhost +si:localuser:$USER
+zle -N toggle_short_pwd
+bindkey '^[p' toggle_short_pwd
+add-zsh-hook chpwd _toggle_pwd_chpwd
 
 # --- Custom tab title ---
 
@@ -201,6 +215,43 @@ preexec_functions=(${preexec_functions:#omz_termsupport_preexec})
 
 add-zsh-hook precmd  _custom_precmd_title
 add-zsh-hook preexec _custom_preexec_title
+
+# Aliases
+
+alias cl="clear"
+alias v="nvim"
+alias pacman-size='expac "%n %m" -l"\n" -Q $(pacman -Qq) | sort -rhk 2 | less'
+
+# Use neovim for vim if present.
+[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
+
+# Verbosity and settings that you pretty much just always are going to want.
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -v" \
+	mkd="mkdir -pv" \
+	ffmpeg="ffmpeg -hide_banner"
+
+# Colorize commands when possible.
+alias \
+	ls="ls -hN --color=auto --group-directories-first" \
+	grep="grep --color=auto" \
+	diff="diff --color=auto" \
+	ccat="highlight --out-format=ansi"
+
+alias gparted="gksu gparted"
+
+autoload zmv
+alias zcp='zmv -C' zln='zmv -L'
+
+# Environment Variables
+if  [ "$(echo $XDG_SESSION_TYPE)" = "wayland" ]; then
+    export DISPLAY=:1
+fi
+
+# Git Stuff (Used Here Especially Because Remote SSH)
+export GPG_TTY=$(tty)
 
 export PATH="$HOME/.local/bin":"$HOME/.local/bin/distrobox":"$HOME/.cargo/bin":$PATH
 
