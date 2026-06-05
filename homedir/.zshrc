@@ -154,14 +154,42 @@ zle -N toggle_short_pwd
 bindkey '^[p' toggle_short_pwd
 add-zsh-hook chpwd _toggle_pwd_chpwd
 
-# --- Custom tab title ---
+# Custom tab title
 
 # Always recompute on new shell — don't inherit from parent
 unset TAB_PREFIX
-if [[ -z "$TAB_PREFIX" ]]; then
-  export TAB_PREFIX=" $(awk -F '=' ' /^PRETTY_NAME/ { gsub(/'"'"'|"/, ""); gsub(/ Linux/, ""); print $2 }' /etc/os-release)"
+unset TAB_OS
+if [[ -z "$TAB_OS" ]]; then
+    export TAB_OS="$(awk -F '=' '
+                    /^PRETTY_NAME/ {
+                    gsub(/'"'"'|"/, "");
+                    gsub(/ Linux/, "");
+                    gsub(/ v[0-9.]+/, ""); print $2 }' /etc/os-release)"
 fi
-_TAB_PREFIX="$TAB_PREFIX"
+
+unset TAB_LIBC
+function check_libc() {
+    TAB_LIBC=$(ldd --version 2>&1 | grep -io "$1")
+}
+
+oses_with_multiple_libs=("void")
+if [[ "${oses_with_multiple_libs[@]}" =~ "${TAB_OS:l}" ]]; then
+    local libs=("GNU" "musl")
+    for lib in $libs; do
+        check_libc "$lib"
+        if [[ -n "$TAB_LIBC" ]]; then
+            break;
+        fi
+    done
+
+    case "${TAB_LIBC:l}" in
+        "gnu") TAB_LIBC=" (glibc)" ;;
+        "musl") TAB_LIBC=" (musl)" ;;
+        *) TAB_LIBC=" (Unknown)" ;;
+    esac
+fi
+
+_TAB_PREFIX=" $TAB_OS$TAB_LIBC"
 
 # Helper to set the terminal tab/window title
 _set_title() {
