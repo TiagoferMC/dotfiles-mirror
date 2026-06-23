@@ -132,4 +132,9 @@ config.keys = {
 
 config.font = wezterm.font_with_fallback { 'Fira Code Nerd Font', 'Noto Color Emoji' }
 
+config.audible_bell = "Disabled"
+wezterm.on('bell', function(window, pane)
+  wezterm.background_child_process({ 'canberra-gtk-play', '-i', 'bell' })
+end)
+
 return config

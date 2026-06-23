@@ -174,19 +174,25 @@ api.nvim_create_autocmd("ColorScheme", {
       { fg = "#34495E", bg = "#2ECC71", ctermfg = 59, ctermbg = 41 }
     )
 
-    -- For cursor colors
-    vim.api.nvim_set_hl(0, "Cursor", { fg = "black", bg = "#00c918", bold = true })
-    vim.api.nvim_set_hl(0, "Cursor2", { fg = "red", bg = "red" })
+    -- For cursor colors, see option guicursor for more info
+    vim.api.nvim_set_hl(0, "Cursor", { fg = "black", bg = "#00c918", update = true })
+    vim.api.nvim_set_hl(0, "Cursor2", { fg = "None", bg = "yellow", update = true })
 
     -- For floating windows border highlight
-    vim.api.nvim_set_hl(0, "FloatBorder", { fg = "LightGreen", bg = "None", bold = true })
+    vim.api.nvim_set_hl(0, "FloatBorder", { bg = "None", fg = "LightGreen", update = true })
 
-    local hl = vim.api.nvim_get_hl(0, { name = "NormalFloat" })
     -- change the background color of floating window to None, so it blenders better
-    vim.api.nvim_set_hl(0, "NormalFloat", { fg = hl.fg, bg = "None" })
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "None", update = true })
+
+    -- this is the highlight used by nvim-cmp for cmdline completion window border
+    vim.api.nvim_set_hl(0, "Pmenu", { bg = "None", update = true })
 
     -- highlight for matching parentheses
-    vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true })
+    vim.api.nvim_set_hl(0, "MatchParen", { bold = true, underline = true, update = true })
+
+    vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { reverse = true, update = true })
+    vim.api.nvim_set_hl(0, "IlluminatedWordRead", { reverse = true, update = true })
+    vim.api.nvim_set_hl(0, "IlluminatedWordText", { reverse = true, update = true })
   end,
 })
 
@@ -259,23 +265,44 @@ local ft_to_command = {
 
 api.nvim_create_autocmd("BufWritePost", {
   group = api.nvim_create_augroup("format check", { clear = true }),
-  pattern = { "*.py", "*.lua" },
+  pattern = { "*" },
   desc = "Check if file needs reformat",
   callback = function(ev)
     local fpath = ev.file
     local ft = vim.api.nvim_get_option_value("filetype", { buf = ev.buf })
-    local cmd = vim.deepcopy(ft_to_command[ft])
-    table.insert(cmd, fpath)
+
+    local cmd_partial = ft_to_command[ft]
+    local cmd = nil
+    if cmd_partial ~= nil then
+      cmd = vim.deepcopy(cmd_partial)
+      table.insert(cmd, fpath)
+    else
+      return
+    end
 
     local exe_path = cmd[1]
     if not utils.executable(exe_path) then
+      vim.print(string.format("%s not found!", exe_path))
       return
     end
 
     local result = vim.system(cmd, { text = true }):wait()
-
     if result.code ~= 0 then
       vim.notify("This file is not formatted!")
+    end
+  end,
+})
+
+api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+  group = api.nvim_create_augroup("auto_save", { clear = true }),
+  pattern = { "*" },
+  desc = "Auto save current file",
+  callback = function(ev)
+    local is_readonly = vim.api.nvim_get_option_value("readonly", { buf = ev.buf })
+    local is_modifiable = vim.api.nvim_get_option_value("modifiable", { buf = ev.buf })
+
+    if not is_readonly and is_modifiable then
+      vim.cmd([[silent! update]])
     end
   end,
 })

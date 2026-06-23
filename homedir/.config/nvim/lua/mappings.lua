@@ -1,9 +1,6 @@
 local keymap = vim.keymap
 local uv = vim.uv
 
--- Clear selection
-keymap.set({ "n", "x" }, "<leader>.", "<cmd>noh<cr>")
-
 -- Save key strokes (now we do not need to press shift to enter command mode).
 keymap.set({ "n", "x" }, ";", ":")
 
@@ -33,12 +30,12 @@ keymap.set("n", [[\x]], "<cmd>windo lclose <bar> cclose <cr>", {
 })
 
 -- Delete a buffer, without closing the window, see https://stackoverflow.com/q/4465095/6064933
-keymap.set("n", [[\d]], "<cmd>bprevious <bar> bdelete #<cr>", {
+keymap.set("n", [[\db]], "<cmd>bprevious <bar> bdelete #<cr>", {
   silent = true,
-  desc = "delete current buffer",
+  desc = "Delete current buffer",
 })
 
-keymap.set("n", [[\D]], function()
+keymap.set("n", [[\dB]], function()
   local buf_ids = vim.api.nvim_list_bufs()
   local cur_buf = vim.api.nvim_win_get_buf(0)
 
@@ -49,7 +46,17 @@ keymap.set("n", [[\D]], function()
     end
   end
 end, {
-  desc = "delete other buffers",
+  desc = "Delete other buffers",
+})
+
+keymap.set("n", [[\dt]], "<cmd>tabclose<CR>", {
+  silent = true,
+  desc = "Delete current tab",
+})
+
+keymap.set("n", [[\dT]], "<cmd>tabonly<CR>", {
+  silent = true,
+  desc = "Delete other tabs",
 })
 
 -- Move the cursor based on physical lines, not the actual lines.
@@ -71,21 +78,18 @@ keymap.set({ "n", "x" }, "L", "g_")
 keymap.set("x", "<", "<gv")
 keymap.set("x", ">", ">gv")
 
--- Edit and reload nvim config file quickly
-keymap.set("n", "<leader>ev", "<cmd>tabnew $MYVIMRC <bar> tcd %:h<cr>", {
-  silent = true,
-  desc = "open init.lua",
-})
-
+-- Restart nvim
 keymap.set("n", "<leader>sv", function()
-  vim.cmd([[
-      update $MYVIMRC
-      source $MYVIMRC
-    ]])
-  vim.notify("Nvim config successfully reloaded!", vim.log.levels.INFO, { title = "nvim-config" })
+  vim.print("Use ZR to restart nvim instead!")
+end)
+
+keymap.set("n", "ZR", function()
+  local current_buf_path = vim.fn.expand("%")
+  local restart_cmd = string.format("restart edit %s", current_buf_path)
+  vim.cmd(restart_cmd)
 end, {
   silent = true,
-  desc = "reload init.lua",
+  desc = "Restart nvim",
 })
 
 -- Reselect the text that has just been pasted, see also https://stackoverflow.com/a/4317090/6064933.

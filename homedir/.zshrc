@@ -273,11 +273,6 @@ alias gparted="gksu gparted"
 autoload zmv
 alias zcp='zmv -C' zln='zmv -L'
 
-# Environment Variables
-if  [ "$(echo $XDG_SESSION_TYPE)" = "wayland" ]; then
-    export DISPLAY=:1
-fi
-
 # Git Stuff (Used Here Especially Because Remote SSH)
 export GPG_TTY=$(tty)
 

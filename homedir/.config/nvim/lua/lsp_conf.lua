@@ -82,30 +82,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     if client.name == "ruff" then
       client.server_capabilities.hoverProvider = false
     end
-
-    -- Uncomment code below to enable inlay hint from language server, some LSP server supports inlay hint,
-    -- but disable this feature by default, so you may need to enable inlay hint in the LSP server config.
-    -- vim.lsp.inlay_hint.enable(true, {buffer=bufnr})
-
-    -- The blow command will highlight the current variable and its usages in the buffer.
-    if client.server_capabilities.documentHighlightProvider then
-      local gid = vim.api.nvim_create_augroup("lsp_document_highlight", { clear = true })
-      vim.api.nvim_create_autocmd("CursorHold", {
-        group = gid,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.document_highlight()
-        end,
-      })
-
-      vim.api.nvim_create_autocmd("CursorMoved", {
-        group = gid,
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.clear_references()
-        end,
-      })
-    end
   end,
   nested = true,
   desc = "Configure buffer keymap and behavior based on LSP",
@@ -115,6 +91,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 local capabilities = require("lsp_utils").get_default_capabilities()
 
+-- `*` will set default config for all lsp
 vim.lsp.config("*", {
   capabilities = capabilities,
   flags = {
@@ -124,14 +101,20 @@ vim.lsp.config("*", {
 
 -- A mapping from lsp server name to the executable name
 local enabled_lsp_servers = {
-  -- pyright = "delance-langserver",
+  pyright = "delance-langserver",
   ruff = "ruff",
   lua_ls = "lua-language-server",
-  ltex = "ltex-ls",
-  clangd = "clangd",
+  -- clangd = "clangd",
   vimls = "vim-language-server",
   bashls = "bash-language-server",
   yamlls = "yaml-language-server",
+  gopls = "gopls",
+  -- the server can be install via homebrew: brew install golangci-lint-langserver
+  -- golangci-lint also needs to be installed: https://github.com/golangci/golangci-lint
+  golangci_lint_ls = "golangci-lint-langserver",
+
+  -- to install codebook, run `brew install codebook-lsp`
+  -- codebook = "codebook-lsp"
 }
 
 for server_name, lsp_executable in pairs(enabled_lsp_servers) do
@@ -146,3 +129,66 @@ for server_name, lsp_executable in pairs(enabled_lsp_servers) do
     vim.notify(msg, vim.log.levels.WARN, { title = "Nvim-config" })
   end
 end
+
+-- LSP related command
+
+vim.api.nvim_create_user_command("LspInfo", "checkhealth vim.lsp", {
+  desc = "Show LSP Info",
+})
+
+vim.api.nvim_create_user_command("LspLog", function(_)
+  local log_path = vim.lsp.log.get_filename()
+
+  vim.cmd(string.format("edit %s", log_path))
+end, {
+  desc = "Show LSP log",
+})
+
+vim.api.nvim_create_user_command("LspRestart", "lsp restart", {
+  desc = "Restart LSP",
+})
+
+--- show LSP progress (works on Ghostty)
+vim.api.nvim_create_autocmd("LspProgress", {
+  callback = function(ev)
+    local value = ev.data.params.value
+    vim.api.nvim_echo({ { value.message or "done" } }, false, {
+      id = "lsp." .. ev.data.client_id,
+      kind = "progress",
+      source = "vim.lsp",
+      title = value.title,
+      status = value.kind ~= "end" and "running" or "success",
+      percent = value.percentage,
+    })
+  end,
+})
+
+-- this controls the LSP inlayHints behavior
+vim.g.lsp_inlay_hint_enabled = false
+
+local update_inlayhint = function(enable)
+  -- Some LSP server supports inlay hint, but disable this feature by default, so you may need to
+  -- enable inlay hint in the LSP server config.
+  vim.lsp.inlay_hint.enable(enable)
+end
+
+vim.api.nvim_create_user_command("LspInlayHints", function(context)
+  -- vim.print("context", context)
+  if context["args"] == "enable" then
+    vim.g.lsp_inlay_hint_enabled = true
+  end
+
+  if context["args"] == "disable" then
+    vim.g.lsp_inlay_hint_enabled = false
+  end
+
+  update_inlayhint(vim.g.lsp_inlay_hint_enabled)
+end, {
+  bang = false,
+  nargs = 1,
+  force = true,
+  desc = "Toggle LSP inlayHints",
+  complete = function()
+    return { "enable", "disable" }
+  end,
+})
