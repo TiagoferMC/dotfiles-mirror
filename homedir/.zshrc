@@ -137,10 +137,42 @@ function _toggle_pwd_chpwd() {
     _REAL_PWD="$PWD"
 }
 
-function _exit_code_display() {
+typeset -g _LAST_EXIT=0
+typeset -g _SHOW_EXIT=0
+typeset -g _CMD_RAN=0
+
+function _precmd_exit() {
     local code=$?
-    (( code != 0 )) && echo "%B%{$fg[red]%}($code)%{$reset_color%}%b "
+    if (( _CMD_RAN )); then
+        _CMD_RAN=0
+        if (( code != 0 )); then
+            _LAST_EXIT=$code
+            _SHOW_EXIT=1
+        else
+            _SHOW_EXIT=0
+        fi
+    else
+        _SHOW_EXIT=0
+    fi
 }
+
+function _preexec_exit() {
+    _CMD_RAN=1
+}
+
+function TRAPINT() {
+    _LAST_EXIT=130
+    _SHOW_EXIT=1
+    _CMD_RAN=0
+    return 130
+}
+
+function _exit_code_display() {
+    (( _SHOW_EXIT )) && echo "%B%{$fg[red]%}($_LAST_EXIT)%{$reset_color%}%b "
+}
+
+precmd_functions=(_precmd_exit $precmd_functions)
+add-zsh-hook preexec _preexec_exit
 
 PROMPT="\$(_exit_code_display)${PROMPT//'%~'/\$(_pwd_display)}"
 
