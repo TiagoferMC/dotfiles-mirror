@@ -137,7 +137,12 @@ function _toggle_pwd_chpwd() {
     _REAL_PWD="$PWD"
 }
 
-PROMPT="${PROMPT//'%~'/\$(_pwd_display)}"
+function _exit_code_display() {
+    local code=$?
+    (( code != 0 )) && echo "%B%{$fg[red]%}($code)%{$reset_color%}%b "
+}
+
+PROMPT="\$(_exit_code_display)${PROMPT//'%~'/\$(_pwd_display)}"
 
 function toggle_short_pwd() {
     if (( _PWD_SHORTENED == 0 )); then
@@ -243,6 +248,10 @@ preexec_functions=(${preexec_functions:#omz_termsupport_preexec})
 
 add-zsh-hook precmd  _custom_precmd_title
 add-zsh-hook preexec _custom_preexec_title
+
+# Environment Variable
+export DISPLAY=:0
+export XAUTHORITY=$(env | awk -F= '/XAUTHORITY/ { print $2 }')
 
 # Aliases
 
