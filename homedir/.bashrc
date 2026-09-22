@@ -1,17 +1,21 @@
 #!/usr/bin/env bash
 
 # bleh.sh
-source ~/.local/share/blesh/ble.sh
-bleopt highlight_syntax=
-bleopt prompt_eol_mark="$(echo -e '\e[7m%\e[0m')"
-bleopt exec_errexit_mark=
-bleopt exec_elapsed_mark=
-bleopt exec_exit_mark=
-bleopt edit_marker=
-bleopt edit_marker_error=
+#source ~/.local/share/blesh/ble.sh
+#bleopt highlight_syntax=
+#bleopt prompt_eol_mark="$(echo -e '\e[7m%\e[0m')"
+#bleopt exec_errexit_mark=
+#bleopt exec_elapsed_mark=
+#bleopt exec_exit_mark=
+#bleopt edit_marker=
+#bleopt edit_marker_error=
 
 # PS1
-PS1="$(echo -e '\e[36m\w \e[33mᐅ ')"
+set_PS1() {
+    PS1="$(echo -e '\e[38;5;117m\w \e[38;5;3mᐅ\e[0m ')"
+}
+
+PROMPT_COMMAND=set_PS1
 
 alias cl="clear"
 alias v="nvim"
