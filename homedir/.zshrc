@@ -68,7 +68,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo z)
+plugins=(git sudo z ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,6 +101,49 @@ source /usr/share/zsh/site-functions/zsh-autosuggestions.zsh 2>/dev/null
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Exit code cleanup
+
+typeset -g _LAST_EXIT=0
+typeset -g _SHOW_EXIT=0
+typeset -g _CMD_RAN=0
+
+function _exit_code_display() {
+    (( _SHOW_EXIT )) && echo "${FG[160]}[$_LAST_EXIT] "
+}
+
+function _precmd_exit() {
+    local code=$?
+    if (( _CMD_RAN )); then
+        _CMD_RAN=0
+        if (( code != 0 )); then
+            _LAST_EXIT=$code
+            _SHOW_EXIT=1
+        else
+            _SHOW_EXIT=0
+        fi
+    else
+        _SHOW_EXIT=0
+    fi
+}
+
+function _preexec_exit() {
+    _CMD_RAN=1
+}
+
+function TRAPINT() {
+    _LAST_EXIT=130
+    _SHOW_EXIT=1
+    _CMD_RAN=0
+    return 130
+}
+
+precmd_functions=(_precmd_exit $precmd_functions)
+add-zsh-hook preexec _preexec_exit
+
+PROMPT="$(echo "$PROMPT" | sed 's/%(?\.\..*\[%?\] )/\$(_exit_code_display)/g')"
+
+# Path shortening
 
 typeset -g _PWD_SHORTENED=0
 typeset -g _REAL_PWD=""
@@ -137,45 +180,6 @@ function _toggle_pwd_chpwd() {
     _REAL_PWD="$PWD"
 }
 
-typeset -g _LAST_EXIT=0
-typeset -g _SHOW_EXIT=0
-typeset -g _CMD_RAN=0
-
-function _precmd_exit() {
-    local code=$?
-    if (( _CMD_RAN )); then
-        _CMD_RAN=0
-        if (( code != 0 )); then
-            _LAST_EXIT=$code
-            _SHOW_EXIT=1
-        else
-            _SHOW_EXIT=0
-        fi
-    else
-        _SHOW_EXIT=0
-    fi
-}
-
-function _preexec_exit() {
-    _CMD_RAN=1
-}
-
-function TRAPINT() {
-    _LAST_EXIT=130
-    _SHOW_EXIT=1
-    _CMD_RAN=0
-    return 130
-}
-
-function _exit_code_display() {
-    (( _SHOW_EXIT )) && echo "%B%{$fg[red]%}($_LAST_EXIT)%{$reset_color%}%b "
-}
-
-precmd_functions=(_precmd_exit $precmd_functions)
-add-zsh-hook preexec _preexec_exit
-
-PROMPT="\$(_exit_code_display)${PROMPT//'%~'/\$(_pwd_display)}"
-
 function toggle_short_pwd() {
     if (( _PWD_SHORTENED == 0 )); then
         _REAL_PWD="$PWD"
@@ -190,6 +194,8 @@ function toggle_short_pwd() {
 zle -N toggle_short_pwd
 bindkey '^[p' toggle_short_pwd
 add-zsh-hook chpwd _toggle_pwd_chpwd
+
+PROMPT="${PROMPT//'%~'/\$(_pwd_display)}"
 
 # Custom tab title
 
@@ -285,6 +291,10 @@ add-zsh-hook preexec _custom_preexec_title
 export DISPLAY=:0
 export XAUTHORITY=$(env | awk -F= '/XAUTHORITY/ { print $2 }')
 
+if [[ -d "/run/host/" ]]; then
+    export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/run/host/var/run/dbus/system_bus_socket
+fi
+
 # Aliases
 
 alias cl="clear"
@@ -317,5 +327,5 @@ alias zcp='zmv -C' zln='zmv -L'
 # Git Stuff (Used Here Especially Because Remote SSH)
 export GPG_TTY=$(tty)
 
-export PATH="$HOME/.local/bin":"$HOME/.local/bin/distrobox":"$HOME/.cargo/bin":$PATH
+export PATH="$HOME/.local/bin":"$HOME/.local/bin/distrobox":"$HOME/.cargo/bin":"$HOME/.doom-emacs/bin":$PATH
 
