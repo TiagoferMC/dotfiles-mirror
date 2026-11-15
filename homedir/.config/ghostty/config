@@ -19,9 +19,6 @@ font-family = "Fira Code Nerd Font"
 # `gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true`
 copy-on-select = true
 
-# --- Clear ----------------------------------------------------------------
-keybind = ctrl+k=clear_screen
-
 # --- Colors ---------------------------------------------------------------
 background = #000000
 foreground = #b2b2b2
@@ -56,20 +53,68 @@ palette = 14=#55ffff
 # initial-command = distrobox enter arch
 
 # --- Keybinds -------------------------------------------------------------
-# ctrl+backspace deletes a word (sends ctrl+w to the shell)
-keybind = ctrl+backspace=text:\x17
+# New tab (default)
+#keybind = ctrl+shift+t=new_tab
 
-# Split the current pane
-keybind = ctrl+alt+shift+h=new_split:left
-keybind = ctrl+alt+shift+j=new_split:down
-keybind = ctrl+alt+shift+k=new_split:up
-keybind = ctrl+alt+shift+l=new_split:right
+# Move between tabs (default)
+#keybind = ctrl+shift+tab=previous_tab
+#keybind = ctrl+tab=next_tab
+#alt+digit_1=goto_tab:1
+#alt+digit_2=goto_tab:2
+#alt+digit_3=goto_tab:3
+#alt+digit_4=goto_tab:4
+#alt+digit_5=goto_tab:5
+#alt+digit_6=goto_tab:6
+#alt+digit_7=goto_tab:7
+#alt+digit_8=goto_tab:8
+#alt+1=goto_tab:1
+#alt+2=goto_tab:2
+#alt+3=goto_tab:3
+#alt+4=goto_tab:4
+#alt+5=goto_tab:5
+#alt+6=goto_tab:6
+#alt+7=goto_tab:7
+#alt+8=goto_tab:8
+#alt+9=last_tab
+
+# Font size (default)
+#keybind = ctrl+-=decrease_font_size:1
+#keybind = ctrl+==increase_font_size:1
+
+# Zoom (default)
+#ctrl+enter=toggle_fullscreen
+#ctrl+shift+enter=toggle_split_zoom
 
 # Move between panes
 keybind = ctrl+alt+h=goto_split:left
 keybind = ctrl+alt+j=goto_split:down
 keybind = ctrl+alt+k=goto_split:up
 keybind = ctrl+alt+l=goto_split:right
+keybind = ctrl+alt+left=goto_split:left
+keybind = ctrl+alt+down=goto_split:down
+keybind = ctrl+alt+up=goto_split:up
+keybind = ctrl+alt+right=goto_split:right
 
-# Close current pane
+# Next / previous pane
+keybind = ctrl+alt+tab=goto_split:next
+keybind = ctrl+alt+shift+tab=goto_split:previous
+
+# Create panes
+keybind = ctrl+shift+h=new_split:left
+keybind = ctrl+shift+j=new_split:down
+keybind = ctrl+shift+k=new_split:up
+keybind = ctrl+shift+l=new_split:right
+keybind = ctrl+shift+left=new_split:left
+keybind = ctrl+shift+down=new_split:down
+keybind = ctrl+shift+up=new_split:up
+keybind = ctrl+shift+right=new_split:right
+
+# Close the current pane
 keybind = ctrl+alt+d=close_surface
+
+# Clear scrollback buffer
+keybind = ctrl+k=clear_screen
+
+# ctrl+backspace deletes a word (sends ctrl+w to the shell)
+keybind = ctrl+backspace=text:\x17
+
