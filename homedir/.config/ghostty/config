@@ -113,7 +113,7 @@ keybind = ctrl+shift+right=new_split:right
 keybind = ctrl+alt+d=close_surface
 
 # Clear scrollback buffer
-keybind = ctrl+k=clear_screen
+keybind = ctrl+semicolon=clear_screen
 
 # ctrl+backspace deletes a word (sends ctrl+w to the shell)
 keybind = ctrl+backspace=text:\x17
