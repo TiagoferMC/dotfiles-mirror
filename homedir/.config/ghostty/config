@@ -14,6 +14,9 @@ font-family = "Fira Code Nerd Font"
 #font-family = "Noto Color Emoji"
 #font-codepoint-map = U+2714=DejaVuSansMono
 
+# --- Copy -----------------------------------------------------------------
+copy-on-select = true
+
 # --- Colors ---------------------------------------------------------------
 background = #000000
 foreground = #b2b2b2
