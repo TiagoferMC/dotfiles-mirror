@@ -19,6 +19,9 @@ font-family = "Fira Code Nerd Font"
 # `gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true`
 copy-on-select = true
 
+# --- Clear ----------------------------------------------------------------
+keybind = ctrl+k=clear_screen
+
 # --- Colors ---------------------------------------------------------------
 background = #000000
 foreground = #b2b2b2
