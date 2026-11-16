@@ -1,0 +1,35 @@
+Diagnostics:
+  ClangTidy:
+    Add: [bugprone-*, performance-*, clang-analyzer-*, modernize-*]
+    Remove: [modernize-use-trailing-return-type,
+             bugprone-easily-swappable-parameters, modernize-avoid-c-arrays]
+CompileFlags:
+  Add: [-Weverything, -Wno-declaration-after-statement]
+
+---
+
+If:
+  PathMatch: .*\.(c|h)
+CompileFlags:
+  Add: [-std=gnu23, -Wno-pre-c11-compat, -Wno-pre-c23-compat]
+
+---
+
+If:
+  PathMatch: .*\.h
+CompileFlags:
+  Add: [-xc-header]
+
+# For C++ projects that use .h headers, put this in the project's .clangd:
+#   CompileFlags:
+#     Remove: [-xc-header, -std=gnu23]
+#     Add: [-xc++-header, -std=gnu++23]
+
+---
+
+If:
+  PathMatch: .*\.(cpp|cc|cxx|hpp|hh|hxx)
+CompileFlags:
+  Add: [-std=gnu++23, -Wno-c++98-compat, -Wno-c++98-compat-pedantic,
+        -Wno-pre-c++14-compat, -Wno-pre-c++17-compat, -Wno-pre-c++20-compat,
+        -Wno-pre-c++23-compat, -Wno-unsafe-buffer-usage]
