@@ -4,7 +4,7 @@ Diagnostics:
     Remove: [modernize-use-trailing-return-type,
              bugprone-easily-swappable-parameters, modernize-avoid-c-arrays]
 CompileFlags:
-  Add: [-Weverything, -Wno-declaration-after-statement]
+  Add: [-Weverything, -Wno-switch-default, -Wno-declaration-after-statement]
 
 ---
 
